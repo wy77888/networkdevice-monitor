@@ -1,0 +1,36 @@
+auths:
+  public_v2:  # 认证模块名称
+    version: 2  # snmp v2c版本
+    community: public  # snmp 团体名
+
+modules:
+  sangfor_af:
+    walk:
+      # 系统信息
+      - 1.3.6.1.2.1.1.3       # 系统运行时长 (sysUpTime)
+      - 1.3.6.1.2.1.1.10      # 系统会话数
+      - 1.3.6.1.2.1.1.11      # CPU 使用率
+      - 1.3.6.1.2.1.1.12      # 内存使用率
+      - 1.3.6.1.2.1.1.13      # 磁盘使用率
+
+      # 网络接口发现
+      - 1.3.6.1.2.1.2.2.1.2     # ifDescr 接口描述
+      - 1.3.6.1.2.1.2.2.1.7     # ifAdminStatus 接口管理员状态
+      - 1.3.6.1.2.1.2.2.1.8     # ifOperStatus 接口运行状态
+      - 1.3.6.1.2.1.31.1.1.1.1  # ifName 接口名称
+      - 1.3.6.1.2.1.31.1.1.1.10 # 接口出流量 (ifHCOutOctets)
+      - 1.3.6.1.2.1.31.1.1.1.6  # 接口入流量 (ifHCInOctets)
+      
+      - 1.3.6.1.2.1.4.21        # IP路由表
+
+    lookups:
+      - source_indexes: [ifIndex]
+        lookup: ifName
+
+    overrides:
+      sysUpTime:
+        scale: 0.01  # 系统运行时长的单位转换
+
+    max_repetitions: 25
+    retries: 3
+    timeout: 5s

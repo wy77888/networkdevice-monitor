@@ -1,0 +1,254 @@
+# WARNING: This file was auto-generated using snmp_exporter generator, manual changes will be lost.
+auths:
+  public_v2:
+    community: public
+    security_level: noAuthNoPriv
+    auth_protocol: MD5
+    priv_protocol: DES
+    version: 2
+modules:
+  sangfor_af:
+    walk:
+    - 1.3.6.1.2.1.2.2.1.2
+    - 1.3.6.1.2.1.2.2.1.7
+    - 1.3.6.1.2.1.2.2.1.8
+    - 1.3.6.1.2.1.31.1.1.1.1
+    - 1.3.6.1.2.1.31.1.1.1.10
+    - 1.3.6.1.2.1.31.1.1.1.6
+    - 1.3.6.1.2.1.4.21
+    get:
+    - 1.3.6.1.2.1.1.10.0
+    - 1.3.6.1.2.1.1.11.0
+    - 1.3.6.1.2.1.1.12.0
+    - 1.3.6.1.2.1.1.13.0
+    - 1.3.6.1.2.1.1.3.0
+    metrics:
+    - name: sysConnNum
+      oid: 1.3.6.1.2.1.1.10
+      type: gauge
+      help: connection Num. - 1.3.6.1.2.1.1.10
+    - name: sysCpuUsage
+      oid: 1.3.6.1.2.1.1.11
+      type: gauge
+      help: cpu usage. - 1.3.6.1.2.1.1.11
+    - name: sysMemUsage
+      oid: 1.3.6.1.2.1.1.12
+      type: gauge
+      help: memory usage. - 1.3.6.1.2.1.1.12
+    - name: sysDiskUsage
+      oid: 1.3.6.1.2.1.1.13
+      type: gauge
+      help: disk usage. - 1.3.6.1.2.1.1.13
+    - name: sysUpTime
+      oid: 1.3.6.1.2.1.1.3
+      type: gauge
+      help: The time (in hundredths of a second) since the network management portion
+        of the system was last re-initialized. - 1.3.6.1.2.1.1.3
+      scale: 0.01
+    - name: ifDescr
+      oid: 1.3.6.1.2.1.2.2.1.2
+      type: DisplayString
+      help: A textual string containing information about the interface - 1.3.6.1.2.1.2.2.1.2
+      indexes:
+      - labelname: ifIndex
+        type: gauge
+      lookups:
+      - labels:
+        - ifIndex
+        labelname: ifName
+        oid: 1.3.6.1.2.1.31.1.1.1.1
+        type: DisplayString
+    - name: ifAdminStatus
+      oid: 1.3.6.1.2.1.2.2.1.7
+      type: gauge
+      help: The desired state of the interface - 1.3.6.1.2.1.2.2.1.7
+      indexes:
+      - labelname: ifIndex
+        type: gauge
+      lookups:
+      - labels:
+        - ifIndex
+        labelname: ifName
+        oid: 1.3.6.1.2.1.31.1.1.1.1
+        type: DisplayString
+      enum_values:
+        1: up
+        2: down
+        3: testing
+    - name: ifOperStatus
+      oid: 1.3.6.1.2.1.2.2.1.8
+      type: gauge
+      help: The current operational state of the interface - 1.3.6.1.2.1.2.2.1.8
+      indexes:
+      - labelname: ifIndex
+        type: gauge
+      lookups:
+      - labels:
+        - ifIndex
+        labelname: ifName
+        oid: 1.3.6.1.2.1.31.1.1.1.1
+        type: DisplayString
+      enum_values:
+        1: up
+        2: down
+        3: testing
+    - name: ifName
+      oid: 1.3.6.1.2.1.31.1.1.1.1
+      type: DisplayString
+      help: The textual name of the interface - 1.3.6.1.2.1.31.1.1.1.1
+      indexes:
+      - labelname: ifIndex
+        type: gauge
+      lookups:
+      - labels:
+        - ifIndex
+        labelname: ifName
+        oid: 1.3.6.1.2.1.31.1.1.1.1
+        type: DisplayString
+    - name: ifHCOutOctets
+      oid: 1.3.6.1.2.1.31.1.1.1.10
+      type: counter
+      help: The total number of octets transmitted out of the interface, including
+        framing characters - 1.3.6.1.2.1.31.1.1.1.10
+      indexes:
+      - labelname: ifIndex
+        type: gauge
+      lookups:
+      - labels:
+        - ifIndex
+        labelname: ifName
+        oid: 1.3.6.1.2.1.31.1.1.1.1
+        type: DisplayString
+    - name: ifHCInOctets
+      oid: 1.3.6.1.2.1.31.1.1.1.6
+      type: counter
+      help: The total number of octets received on the interface, including framing
+        characters - 1.3.6.1.2.1.31.1.1.1.6
+      indexes:
+      - labelname: ifIndex
+        type: gauge
+      lookups:
+      - labels:
+        - ifIndex
+        labelname: ifName
+        oid: 1.3.6.1.2.1.31.1.1.1.1
+        type: DisplayString
+    - name: ipRouteDest
+      oid: 1.3.6.1.2.1.4.21.1.1
+      type: InetAddressIPv4
+      help: The destination IP address of this route - 1.3.6.1.2.1.4.21.1.1
+      indexes:
+      - labelname: ipRouteDest
+        type: InetAddressIPv4
+    - name: ipRouteIfIndex
+      oid: 1.3.6.1.2.1.4.21.1.2
+      type: gauge
+      help: The index value which uniquely identifies the local interface through
+        which the next hop of this route should be reached - 1.3.6.1.2.1.4.21.1.2
+      indexes:
+      - labelname: ipRouteDest
+        type: InetAddressIPv4
+    - name: ipRouteMetric1
+      oid: 1.3.6.1.2.1.4.21.1.3
+      type: gauge
+      help: The primary routing metric for this route - 1.3.6.1.2.1.4.21.1.3
+      indexes:
+      - labelname: ipRouteDest
+        type: InetAddressIPv4
+    - name: ipRouteMetric2
+      oid: 1.3.6.1.2.1.4.21.1.4
+      type: gauge
+      help: An alternate routing metric for this route - 1.3.6.1.2.1.4.21.1.4
+      indexes:
+      - labelname: ipRouteDest
+        type: InetAddressIPv4
+    - name: ipRouteMetric3
+      oid: 1.3.6.1.2.1.4.21.1.5
+      type: gauge
+      help: An alternate routing metric for this route - 1.3.6.1.2.1.4.21.1.5
+      indexes:
+      - labelname: ipRouteDest
+        type: InetAddressIPv4
+    - name: ipRouteMetric4
+      oid: 1.3.6.1.2.1.4.21.1.6
+      type: gauge
+      help: An alternate routing metric for this route - 1.3.6.1.2.1.4.21.1.6
+      indexes:
+      - labelname: ipRouteDest
+        type: InetAddressIPv4
+    - name: ipRouteNextHop
+      oid: 1.3.6.1.2.1.4.21.1.7
+      type: InetAddressIPv4
+      help: The IP address of the next hop of this route - 1.3.6.1.2.1.4.21.1.7
+      indexes:
+      - labelname: ipRouteDest
+        type: InetAddressIPv4
+    - name: ipRouteType
+      oid: 1.3.6.1.2.1.4.21.1.8
+      type: gauge
+      help: The type of route - 1.3.6.1.2.1.4.21.1.8
+      indexes:
+      - labelname: ipRouteDest
+        type: InetAddressIPv4
+      enum_values:
+        1: other
+        2: invalid
+        3: direct
+        4: indirect
+    - name: ipRouteProto
+      oid: 1.3.6.1.2.1.4.21.1.9
+      type: gauge
+      help: The routing mechanism via which this route was learned - 1.3.6.1.2.1.4.21.1.9
+      indexes:
+      - labelname: ipRouteDest
+        type: InetAddressIPv4
+      enum_values:
+        1: other
+        2: local
+        3: netmgmt
+        4: icmp
+        5: egp
+        6: ggp
+        7: hello
+        8: rip
+        9: is-is
+        10: es-is
+        11: ciscoIgrp
+        12: bbnSpfIgp
+        13: ospf
+        14: bgp
+    - name: ipRouteAge
+      oid: 1.3.6.1.2.1.4.21.1.10
+      type: gauge
+      help: The number of seconds since this route was last updated or otherwise determined
+        to be correct - 1.3.6.1.2.1.4.21.1.10
+      indexes:
+      - labelname: ipRouteDest
+        type: InetAddressIPv4
+    - name: ipRouteMask
+      oid: 1.3.6.1.2.1.4.21.1.11
+      type: InetAddressIPv4
+      help: Indicate the mask to be logical-ANDed with the destination address before
+        being compared to the value in the ipRouteDest field - 1.3.6.1.2.1.4.21.1.11
+      indexes:
+      - labelname: ipRouteDest
+        type: InetAddressIPv4
+    - name: ipRouteMetric5
+      oid: 1.3.6.1.2.1.4.21.1.12
+      type: gauge
+      help: An alternate routing metric for this route - 1.3.6.1.2.1.4.21.1.12
+      indexes:
+      - labelname: ipRouteDest
+        type: InetAddressIPv4
+    - name: ipRouteInfo
+      oid: 1.3.6.1.2.1.4.21.1.13
+      type: OctetString
+      help: A reference to MIB definitions specific to the particular routing protocol
+        which is responsible for this route, as determined by the value specified
+        in the route's ipRouteProto value - 1.3.6.1.2.1.4.21.1.13
+      indexes:
+      - labelname: ipRouteDest
+        type: InetAddressIPv4
+    max_repetitions: 25
+    retries: 3
+    timeout: 5s
