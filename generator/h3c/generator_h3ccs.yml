@@ -1,0 +1,445 @@
+auths:
+  h3ccs_auth:
+    version: 2
+    community: <REDACTED>  # 真实值只保存在设备/服务器上,不要提交明文
+
+modules:
+  # 华三交换机系统指标模块
+  # 适配型号S5000&S5110&S5120&S5130&S5135&S5170&S5500&S5800&S6300&S6500&S6800&S10500系列
+  # h3ccs_ 的前缀是指 H：H3C（华三）C：Campus（园区）S：Switch（交换机）
+  h3ccs_system:
+    walk:
+      # sysName 系统名称
+      - 1.3.6.1.2.1.1.5
+      # sysUpTime 从系统网管部分启动以来运行的时间 单位：百分之一秒 已转换为秒
+      # sysUpTime 是一个32位的整型计数器 在运行到 42949672.95 秒后会重新从 0 计数
+      - 1.3.6.1.2.1.1.3
+      # entPhysicalName 物理实体名 类型：OCTET STRING
+      - 1.3.6.1.2.1.47.1.1.1.1.7
+      # entPhysicalSoftwareRev 软件版本号 类型：OCTET STRING
+      - 1.3.6.1.2.1.47.1.1.1.1.10
+      # entPhysicalSerialNum 序列号 缺省值：1 类型：OCTET STRING
+      - 1.3.6.1.2.1.47.1.1.1.1.11
+      # hh3cEntityExtErrorStatus 实体操作状态 1：notSupported 2：Normal 3：postFailure 4：entityAbsent 71：moduleFaulty
+      - 1.3.6.1.4.1.25506.2.6.1.1.1.1.19
+      # hh3cEntityExtUpTime 实体上电时间 单位：秒
+      # hh3cEntityExtUpTime 是一个32位的整型计数器 在运行到 4294967295 秒后会重新从 0 计数
+      - 1.3.6.1.4.1.25506.2.6.1.1.1.1.11
+      # hh3cEntityExtTemperature 实体温度 读取的是温度传感器测量温度的最高值 单位：°C
+      - 1.3.6.1.4.1.25506.2.6.1.1.1.1.12
+      # # hh3cEntityExtTemperatureThreshold 实体温度阈值 单位：°C
+      # - 1.3.6.1.4.1.25506.2.6.1.1.1.1.13
+      # hh3cEntityExtCpuUsage 实体CPU使用率 单位：%
+      - 1.3.6.1.4.1.25506.2.6.1.1.1.1.6
+      # # hh3cEntityExtCpuUsageThreshold 实体CPU告警阈值百分比 0为无效值 单位：%
+      # - 1.3.6.1.4.1.25506.2.6.1.1.1.1.7
+      # hh3cEntityExtMemUsage 实体内存使用率 单位：%
+      - 1.3.6.1.4.1.25506.2.6.1.1.1.1.8
+      # # hh3cEntityExtMemUsageThreshold 实体内存告警阈值百分比 单位：%
+      # - 1.3.6.1.4.1.25506.2.6.1.1.1.1.9
+      # # hh3cEntityExtVoltage 实体电压 单位：mV
+      # - 1.3.6.1.4.1.25506.2.6.1.1.1.1.14
+      # # hh3cEntityExtVoltageLowThreshold 实体最低电压阈值 单位：mV
+      # - 1.3.6.1.4.1.25506.2.6.1.1.1.1.15
+      # # hh3cEntityExtVoltageHighThreshold 实体最高电压阈值 单位：mV
+      # - 1.3.6.1.4.1.25506.2.6.1.1.1.1.16
+      # hh3cDevMFanStatus 风扇的状态信息 active(1) deactive(2) not-install(3) unsupport(4) 风扇索引：hh3cDevMFanNum
+      - 1.3.6.1.4.1.25506.8.35.9.1.1.1.2
+      # # hh3cDevMFanPosFrame 风扇所在的框号
+      # - 1.3.6.1.4.1.25506.8.35.9.1.1.1.3
+      # # hh3cDevMFanPosSlot 风扇所在的槽位号
+      # - 1.3.6.1.4.1.25506.8.35.9.1.1.1.4
+      # # hh3cDevMFanPosIndex 风扇的本地索引
+      # - 1.3.6.1.4.1.25506.8.35.9.1.1.1.5
+      # # hh3cDevMFanCurrentSpeed 风扇的当前转速
+      # - 1.3.6.1.4.1.25506.8.35.9.1.1.1.7
+      # hh3cDevMPowerStatus 电源的状态信息 active(1) deactive(2) not-install(3) unsupport(4) 电源索引：hh3cDevMPowerNum
+      - 1.3.6.1.4.1.25506.8.35.9.1.2.1.2
+      # hh3cFlhPartStatus 存储设备分区状态 readOnly(1) runFromFlash(2) readWrite(3)
+      - 1.3.6.1.4.1.25506.2.5.1.1.4.1.1.8
+      # hh3cFlhPartSpace 存储设备分区容量 单位：Byte
+      - 1.3.6.1.4.1.25506.2.5.1.1.4.1.1.4
+      # # hh3cFlhPartHCSpace 存储介质分区大小 单位：Byte Flash分区大小超过2G的使用这个 oid 
+      # - 1.3.6.1.4.1.25506.2.5.1.1.4.1.1.15
+      # hh3cFlhPartSpaceFree 存储设备分区空闲容量 单位：Byte
+      - 1.3.6.1.4.1.25506.2.5.1.1.4.1.1.5
+      # # hh3cFlhPartHCSpaceFree 存储介质分区剩余大小 单位：Byte Flash分区大小超过2G的使用这个 oid 
+      # - 1.3.6.1.4.1.25506.2.5.1.1.4.1.1.16
+      # hh3cFlhPartName 存储设备分区名称
+      - 1.3.6.1.4.1.25506.2.5.1.1.4.1.1.10
+      # hh3cMaxMacLearnRange 支持物理地址最大范围
+      - 1.3.6.1.4.1.25506.8.35.5.1.12
+      # hh3cEntityExtMacAddressCount 实体MAC地址统计
+      - 1.3.6.1.4.1.25506.2.6.1.2.1.1.5
+
+    max_repetitions: 25
+    retries: 3
+    timeout: 5s
+    allow_nonincreasing_oids: false
+    use_unconnected_udp_socket: false
+
+    lookups:
+      # - source_indexes: [hh3cEntityExtPhysicalIndex]
+      #   lookup: entPhysicalIndex
+      # - source_indexes: [entPhysicalIndex]
+      #   lookup: entPhysicalName
+      # - source_indexes: [hh3cEntityExtManuPhysicalIndex]
+      #   lookup: entPhysicalIndex
+      - source_indexes: [entPhysicalIndex]
+        lookup: entPhysicalName
+      - source_indexes: [hh3cEntityExtPhysicalIndex]
+        lookup: entPhysicalName
+      - source_indexes: [hh3cEntityExtManuPhysicalIndex]
+        lookup: entPhysicalName
+      - source_indexes: [hh3cFlhIndex, hh3cFlhPartIndex]
+        lookup: hh3cFlhPartName
+
+    overrides:
+      entPhysicalSoftwareRev:
+        ignore: false
+        type: DisplayString
+      entPhysicalSerialNum:
+        ignore: false
+        type: DisplayString
+      entPhysicalName:
+        ignore: true
+        type: DisplayString
+      hh3cFlhPartName:
+        ignore: true
+        type: DisplayString
+      sysUpTime:
+        type: counter
+        ignore: false
+        scale: 0.01
+      
+    filters:
+      static:
+        - targets:
+          - 1.3.6.1.4.1.25506.2.6.1.2.1.1.5
+          indices: ["2"]
+      dynamic:
+        - oid: 1.3.6.1.2.1.47.1.1.1.1.7
+          targets:
+            - "1.3.6.1.2.1.47.1.1.1.1.10"
+            - "1.3.6.1.4.1.25506.2.6.1.1.1.1.11"
+          values: ["S\\d{4}.*", "H3C S\\d{4}.*"]
+        - oid: 1.3.6.1.2.1.47.1.1.1.1.7
+          targets:
+            - "1.3.6.1.2.1.47.1.1.1.1.11"
+            - "1.3.6.1.4.1.25506.2.6.1.1.1.1.19"
+            - "1.3.6.1.4.1.25506.2.6.1.1.1.1.12"
+            - "1.3.6.1.4.1.25506.2.6.1.1.1.1.6"
+            - "1.3.6.1.4.1.25506.2.6.1.1.1.1.8"
+          values: ["^Board$", "^(Master|Slave)?Board \\d+$", "^(Master|Slave) Board \\d+$"]
+  
+  # 华三交换机接口指标模块
+  # 适配型号S5000&S5110&S5120&S5130&S5135&S5170&S5500&S5800&S6300&S6500&S6800&S10500系列
+  h3ccs_interface:
+    walk:
+      # ifName 接口名称
+      - 1.3.6.1.2.1.31.1.1.1.1
+      # ifAdminStatus 接口管理状态
+      - 1.3.6.1.2.1.2.2.1.7
+      # ifOperStatus 接口工作状态
+      - 1.3.6.1.2.1.2.2.1.8
+      # ifHighSpeed 接口定义的速率 类型正整数 单位：Mbps
+      - 1.3.6.1.2.1.31.1.1.1.15
+      # ifMtu 接口MTU
+      - 1.3.6.1.2.1.2.2.1.4
+      # ifAlias 网络管理员配置的接口别名
+      - 1.3.6.1.2.1.31.1.1.1.18
+      # ifPhysAddress 接口的MAC地址
+      - 1.3.6.1.2.1.2.2.1.6
+      # ifHCInOctets 接口流量（in）64位
+      - 1.3.6.1.2.1.31.1.1.1.6
+      # ifHCOutOctets 接口流量（out）64位
+      - 1.3.6.1.2.1.31.1.1.1.10
+      # ifInDiscards 接口丢包（in）32位
+      - 1.3.6.1.2.1.2.2.1.13
+      # ifOutDiscards 接口丢包（out）32位
+      - 1.3.6.1.2.1.2.2.1.19
+      # ifInErrors 接口错包（in）32位
+      - 1.3.6.1.2.1.2.2.1.14
+      # ifOutErrors 接口错包（out）32位
+      - 1.3.6.1.2.1.2.2.1.20
+      # ifHCInUcastPkts 接口单播包转发数（in）64位
+      - 1.3.6.1.2.1.31.1.1.1.7
+      # ifHCInMulticastPkts 接口多播包转发数（in）64位
+      - 1.3.6.1.2.1.31.1.1.1.8
+      # ifHCInBroadcastPkts 接口广播包转发数（in）64位
+      - 1.3.6.1.2.1.31.1.1.1.9
+      # ifHCOutUcastPkts 接口单播包转发数（out）64位
+      - 1.3.6.1.2.1.31.1.1.1.11
+      # ifHCOutMulticastPkts 接口多播包转发数（out）64位
+      - 1.3.6.1.2.1.31.1.1.1.12
+      # ifHCOutBroadcastPkts 接口广播包转发数（out）64位
+      - 1.3.6.1.2.1.31.1.1.1.13
+      # # dot3StatsDuplexStatus 接口双工模式 unknown(1), halfDuplex(2), fullDuplex(3)
+      # - 1.3.6.1.2.1.10.7.2.1.19
+    
+    max_repetitions: 25
+    retries: 3
+    timeout: 5s
+    allow_nonincreasing_oids: false
+    use_unconnected_udp_socket: false
+    
+    lookups:
+      - source_indexes: [ifIndex]
+        lookup: ifName
+        # drop_source_indexes: false
+      # - source_indexes: [dot3StatsIndex]
+      #   lookup: ifName
+    
+    overrides:
+      ifAlias:
+        ignore: false
+        type: DisplayString
+      ifName:
+        ignore: true
+        type: DisplayString
+      ifPhysAddress:
+        ignore: false
+        type: PhysAddress48
+    
+    filters:
+      dynamic:
+        - oid: 1.3.6.1.2.1.2.2.1.7
+          targets:
+            - "1.3.6.1.2.1.2.2.1.8"
+            - "1.3.6.1.2.1.31.1.1.1.15"
+            - "1.3.6.1.2.1.2.2.1.4"
+            - "1.3.6.1.2.1.31.1.1.1.18"
+            - "1.3.6.1.2.1.31.1.1.1.6"
+            - "1.3.6.1.2.1.31.1.1.1.10"
+            - "1.3.6.1.2.1.2.2.1.13"
+            - "1.3.6.1.2.1.2.2.1.19"
+            - "1.3.6.1.2.1.2.2.1.14"
+            - "1.3.6.1.2.1.2.2.1.20"
+            - "1.3.6.1.2.1.31.1.1.1.7"
+            - "1.3.6.1.2.1.31.1.1.1.8"
+            - "1.3.6.1.2.1.31.1.1.1.9"
+            - "1.3.6.1.2.1.31.1.1.1.11"
+            - "1.3.6.1.2.1.31.1.1.1.12"
+            - "1.3.6.1.2.1.31.1.1.1.13"
+            - "1.3.6.1.2.1.2.2.1.6"
+          values: ["1"]
+  
+  # 华三交换机 Optical 指标模块 支持V7及以上版本固件
+  # 适配型号S5000&S5110&S5120&S5130&S5135&S5170&S5500&S5800&S6300&S6500&S6800&S10500系列
+  h3ccs_optical:
+    # 某些杂牌光模块没办法获取全面的 oid 因为不支持数字诊断监控功能
+    walk:
+      # ifName 接口名称
+      - 1.3.6.1.2.1.31.1.1.1.1
+      # hh3cTransceiverHardwareType 光模块的硬件类型 SM MM Copper
+      - 1.3.6.1.4.1.25506.2.70.1.1.1.1
+      # hh3cTransceiverType 光模块按照SFP等划分的类型
+      - 1.3.6.1.4.1.25506.2.70.1.1.1.2
+      # hh3cTransceiverWaveLength 光模块的波长 单位：nm
+      - 1.3.6.1.4.1.25506.2.70.1.1.1.3
+      # hh3cTransceiverTransferDistance 光模块的最大传输距离 单位：米
+      - 1.3.6.1.4.1.25506.2.70.1.1.1.7
+      # # hh3cTransceiverDiagnostic 光模块是否支持数字诊断 true(1) false(2)
+      # - 1.3.6.1.4.1.25506.2.70.1.1.1.8
+      # hh3cTransceiverCurTXPower 光模块当前的发送功率 单位：百分之一dBM
+      - 1.3.6.1.4.1.25506.2.70.1.1.1.9
+      # hh3cTransceiverCurRXPower 光模块当前的接收功率 单位：百分之一dBM
+      - 1.3.6.1.4.1.25506.2.70.1.1.1.12
+      # hh3cTransceiverTemperature 光模块当前的温度 单位：°C
+      - 1.3.6.1.4.1.25506.2.70.1.1.1.15
+      # hh3cTransceiverVoltage 光模块当前的电压 单位：百分之一伏特
+      - 1.3.6.1.4.1.25506.2.70.1.1.1.16
+      # hh3cTransceiverBiasCurrent 光模块当前的偏置电流 单位：百分之一毫安
+      - 1.3.6.1.4.1.25506.2.70.1.1.1.17
+      # hh3cTransceiverPwrOutHiWarn 输出功率预警上限值 单位：十分之一微瓦 0 代表不支持
+      - 1.3.6.1.4.1.25506.2.70.1.1.1.32
+      # hh3cTransceiverPwrOutLoWarn 输出功率预警下限值 单位：十分之一微瓦 0 代表不支持
+      - 1.3.6.1.4.1.25506.2.70.1.1.1.33
+      # hh3cTransceiverRcvPwrHiWarn 输入功率预警上限值 单位：十分之一微瓦 0 代表不支持
+      - 1.3.6.1.4.1.25506.2.70.1.1.1.36
+      # hh3cTransceiverRcvPwrLoWarn 输入功率预警下限值 单位：十分之一微瓦 0 代表不支持
+      - 1.3.6.1.4.1.25506.2.70.1.1.1.37
+    
+    max_repetitions: 25
+    retries: 3
+    timeout: 5s
+    allow_nonincreasing_oids: false
+    use_unconnected_udp_socket: false
+    
+    lookups:
+      - source_indexes: [ifIndex]
+        lookup: ifName
+        # drop_source_indexes: true
+    
+    overrides:
+      hh3cTransceiverHardwareType:
+        ignore: false
+        type: DisplayString
+      hh3cTransceiverType:
+        ignore: false
+        type: DisplayString
+      ifName:
+        ignore: true
+        type: DisplayString
+
+    filters:
+      dynamic:
+        - oid: 1.3.6.1.4.1.25506.2.70.1.1.1.1
+          targets:
+            - "1.3.6.1.4.1.25506.2.70.1.1.1.1"
+            - "1.3.6.1.4.1.25506.2.70.1.1.1.2"
+            - "1.3.6.1.4.1.25506.2.70.1.1.1.3"
+            - "1.3.6.1.4.1.25506.2.70.1.1.1.7"
+            - "1.3.6.1.4.1.25506.2.70.1.1.1.9"
+            - "1.3.6.1.4.1.25506.2.70.1.1.1.12"
+            - "1.3.6.1.4.1.25506.2.70.1.1.1.15"
+            - "1.3.6.1.4.1.25506.2.70.1.1.1.16"
+            - "1.3.6.1.4.1.25506.2.70.1.1.1.17"
+            - "1.3.6.1.4.1.25506.2.70.1.1.1.32"
+            - "1.3.6.1.4.1.25506.2.70.1.1.1.33"
+            - "1.3.6.1.4.1.25506.2.70.1.1.1.36"
+            - "1.3.6.1.4.1.25506.2.70.1.1.1.37"
+          values: ["SM", "MM"]
+    
+  # 华三交换机 Optical 指标模块 支持V5版本固件
+  # 适配型号S5000&S5110&S5120&S5130&S5135&S5170&S5500&S5800&S6300&S6500&S6800&S10500系列
+  h3ccs_optical_v5:
+    # 某些杂牌光模块没办法获取全面的 oid 因为不支持数字诊断监控功能
+    walk:
+      # ifName 接口名称
+      - 1.3.6.1.2.1.31.1.1.1.1
+      # hh3cTransceiverHardwareType 光模块的硬件类型 SM MM Copper
+      - 1.3.6.1.4.1.25506.2.70.1.1.1.1
+      # hh3cTransceiverType 光模块按照SFP等划分的类型
+      - 1.3.6.1.4.1.25506.2.70.1.1.1.2
+      # hh3cTransceiverWaveLength 光模块的波长 单位：nm
+      - 1.3.6.1.4.1.25506.2.70.1.1.1.3
+      # hh3cTransceiverTransferDistance 光模块的最大传输距离 单位：米
+      - 1.3.6.1.4.1.25506.2.70.1.1.1.7
+      # # hh3cTransceiverDiagnostic 光模块是否支持数字诊断 true(1) false(2)
+      # - 1.3.6.1.4.1.25506.2.70.1.1.1.8
+      # hh3cTransceiverCurTXPower 光模块当前的发送功率 单位：百分之一dBM
+      - 1.3.6.1.4.1.25506.2.70.1.1.1.9
+      # hh3cTransceiverCurRXPower 光模块当前的接收功率 单位：百分之一dBM
+      - 1.3.6.1.4.1.25506.2.70.1.1.1.12
+      # hh3cTransceiverTemperature 光模块当前的温度 单位：°C
+      - 1.3.6.1.4.1.25506.2.70.1.1.1.15
+      # hh3cTransceiverVoltage 光模块当前的电压 单位：百分之一伏特
+      - 1.3.6.1.4.1.25506.2.70.1.1.1.16
+      # hh3cTransceiverBiasCurrent 光模块当前的偏置电流 单位：百分之一毫安
+      - 1.3.6.1.4.1.25506.2.70.1.1.1.17
+    
+    max_repetitions: 25
+    retries: 3
+    timeout: 5s
+    allow_nonincreasing_oids: false
+    use_unconnected_udp_socket: false
+    
+    lookups:
+      - source_indexes: [ifIndex]
+        lookup: ifName
+        # drop_source_indexes: true
+    
+    overrides:
+      hh3cTransceiverHardwareType:
+        ignore: false
+        type: DisplayString
+      hh3cTransceiverType:
+        ignore: false
+        type: DisplayString
+      ifName:
+        ignore: true
+        type: DisplayString
+
+    filters:
+      dynamic:
+        - oid: 1.3.6.1.4.1.25506.2.70.1.1.1.1
+          targets:
+            - "1.3.6.1.4.1.25506.2.70.1.1.1.1"
+            - "1.3.6.1.4.1.25506.2.70.1.1.1.2"
+            - "1.3.6.1.4.1.25506.2.70.1.1.1.3"
+            - "1.3.6.1.4.1.25506.2.70.1.1.1.7"
+            - "1.3.6.1.4.1.25506.2.70.1.1.1.9"
+            - "1.3.6.1.4.1.25506.2.70.1.1.1.12"
+            - "1.3.6.1.4.1.25506.2.70.1.1.1.15"
+            - "1.3.6.1.4.1.25506.2.70.1.1.1.16"
+            - "1.3.6.1.4.1.25506.2.70.1.1.1.17"
+          values: ["SM", "MM"]
+  
+  # 华三交换机 irf 指标模块
+  # 适配型号S5000&S5110&S5120&S5130&S5135&S5170&S5500&S5800&S6300&S6500&S6800&S10500系列
+  h3ccs_stack:
+    walk:
+      # entPhysicalName 堆叠接口名称
+      - 1.3.6.1.2.1.47.1.1.1.1.7
+      # hh3cStackMemberNum 本IRF系统目前包含的堆叠设备数量
+      - 1.3.6.1.4.1.25506.2.91.1.2
+      # hh3cStackTopology 本IRF系统的堆叠拓扑类型 链式拓扑：chainConn(1) 环形拓扑：ringConn(2)
+      - 1.3.6.1.4.1.25506.2.91.1.7
+      # hh3cStackMemberID 设备在IRF中的成员编号
+      - 1.3.6.1.4.1.25506.2.91.2.1.1
+      # hh3cStackPriority 设备在IRF系统中的优先级
+      - 1.3.6.1.4.1.25506.2.91.2.1.3
+      # hh3cStackBoardRole 本主控板在IRF系统中的角色 设备在堆叠中的角色 1：备交换机 2：主交换机 3：正加入中 4：其他
+      - 1.3.6.1.4.1.25506.2.91.3.1.1
+      # hh3cStackPortNum 设备当前使能的堆叠接口个数
+      - 1.3.6.1.4.1.25506.2.91.2.1.4
+    
+    max_repetitions: 15
+    retries: 3
+    timeout: 5s
+    allow_nonincreasing_oids: false
+    use_unconnected_udp_socket: false
+    
+    lookups:
+      - source_indexes: [entPhysicalIndex]
+        lookup: entPhysicalName
+    
+    overrides:
+      entPhysicalName:
+        ignore: true
+        type: DisplayString
+  
+  # 华三交换机 LLDP 指标模块
+  # 适配型号S5000&S5110&S5120&S5130&S5135&S5170&S5500&S5800&S6300&S6500&S6800&S10500系列
+  h3ccs_lldp:
+    walk:
+      # lldpLocSysName LLDP本地系统名称
+      - 1.0.8802.1.1.2.1.3.3
+      # lldpLocPortId LLDP本地端口ID
+      - 1.0.8802.1.1.2.1.3.7.1.3
+      # lldpLocPortDesc LLDP本地端口描述
+      - 1.0.8802.1.1.2.1.3.7.1.4
+      # lldpRemPortId 邻居的端口标识符
+      - 1.0.8802.1.1.2.1.4.1.1.7
+      # lldpRemPortDesc 邻居的端口描述
+      - 1.0.8802.1.1.2.1.4.1.1.8
+      # lldpRemSysName 邻居的系统名字
+      - 1.0.8802.1.1.2.1.4.1.1.9
+    
+    max_repetitions: 15
+    retries: 3
+    timeout: 5s
+    allow_nonincreasing_oids: false
+    use_unconnected_udp_socket: false
+    
+    lookups:
+
+    overrides:
+      lldpLocSysName:
+        ignore: false
+        type: DisplayString
+      lldpLocPortDesc:
+        ignore: false
+        type: DisplayString
+      lldpLocPortId:
+        ignore: false
+        type: DisplayString
+      lldpRemPortId:
+        ignore: false
+        type: DisplayString
+      lldpRemPortDesc:
+        ignore: false
+        type: DisplayString
+    
+    filters:

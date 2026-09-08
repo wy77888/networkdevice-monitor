@@ -46,10 +46,10 @@ auths:
     community: public
     security_level: authPriv
     username: monitor
-    password: Mrot@2024neo
+    password: <REDACTED>
     auth_protocol: SHA
     priv_protocol: AES
-    priv_password: Mrot@2024mei
+    priv_password: <REDACTED>
     version: 3
 ```
 

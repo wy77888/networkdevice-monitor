@@ -4,10 +4,10 @@ auths:
     community: public
     security_level: authPriv
     username: monitor
-    password: Mrot@2024neo
+    password: <REDACTED>  # 真实值只保存在设备/服务器上,不要提交明文
     auth_protocol: SHA
     priv_protocol: AES
-    priv_password: Mrot@2024mei
+    priv_password: <REDACTED>  # 真实值只保存在设备/服务器上,不要提交明文
     version: 3
 modules:
   synology_common:

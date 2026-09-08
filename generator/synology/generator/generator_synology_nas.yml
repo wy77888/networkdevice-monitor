@@ -4,12 +4,12 @@ auths:
     username: monitor
     # noAuthNoPriv authNoPriv authPriv
     security_level: authPriv
-    password: Mrot@2024neo
+    password: <REDACTED>  # 真实值只保存在设备/服务器上,不要提交明文
     # MD5, SHA, SHA224, SHA256, SHA384, or SHA512
     auth_protocol: SHA
     # DES, AES, AES192, AES256, AES192C, or AES256C
     priv_protocol: AES
-    priv_password: Mrot@2024mei
+    priv_password: <REDACTED>  # 真实值只保存在设备/服务器上,不要提交明文
     # context_name: context
   
 modules:

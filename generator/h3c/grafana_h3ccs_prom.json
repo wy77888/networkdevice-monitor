@@ -1,0 +1,6117 @@
+{
+    "__inputs": [
+      {
+        "name": "DS_VICTORIAMETRICS-SINGLE",
+        "label": "VictoriaMetrics-Single",
+        "description": "",
+        "type": "datasource",
+        "pluginId": "prometheus",
+        "pluginName": "Prometheus"
+      }
+    ],
+    "__elements": {},
+    "__requires": [
+      {
+        "type": "panel",
+        "id": "bargauge",
+        "name": "Bar gauge",
+        "version": ""
+      },
+      {
+        "type": "panel",
+        "id": "gauge",
+        "name": "Gauge",
+        "version": ""
+      },
+      {
+        "type": "grafana",
+        "id": "grafana",
+        "name": "Grafana",
+        "version": "11.5.1"
+      },
+      {
+        "type": "datasource",
+        "id": "prometheus",
+        "name": "Prometheus",
+        "version": "1.0.0"
+      },
+      {
+        "type": "panel",
+        "id": "stat",
+        "name": "Stat",
+        "version": ""
+      },
+      {
+        "type": "panel",
+        "id": "table",
+        "name": "Table",
+        "version": ""
+      },
+      {
+        "type": "panel",
+        "id": "timeseries",
+        "name": "Time series",
+        "version": ""
+      }
+    ],
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "description": "Prometheus 数据源通过 SNMP Exporter 采集华三园区交换机指标",
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": null,
+    "links": [],
+    "panels": [
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 24,
+        "panels": [],
+        "title": "交换机基础信息 - 总数（${total}）",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+        },
+        "description": "该设备上行吞吐量",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "fixedColor": "yellow",
+              "mode": "fixed"
+            },
+            "decimals": 2,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "bps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 0,
+          "y": 1
+        },
+        "id": 43,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": true,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sum(irate(ifHCOutOctets{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"}[$__range]) * 8)",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "总体上行吞吐量 (当前)",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+        },
+        "description": "该设备上行吞吐量",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "fixedColor": "yellow",
+              "mode": "fixed"
+            },
+            "decimals": 2,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "bps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 4,
+          "y": 1
+        },
+        "id": 44,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": true,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sum(irate(ifHCInOctets{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"}[$__range]) * 8)",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "总体下行吞吐量 (当前)",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+        },
+        "description": "该设备在指定区间内的出站总流量",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "fixedColor": "orange",
+              "mode": "fixed"
+            },
+            "decimals": 2,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "decbits"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 8,
+          "y": 1
+        },
+        "id": 45,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sum(increase(ifHCOutOctets{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"}[$__range]) * 8)",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "上行总流量",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+        },
+        "description": "该设备在指定区间内的入站总流量",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "fixedColor": "orange",
+              "mode": "fixed"
+            },
+            "decimals": 2,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "decbits"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 12,
+          "y": 1
+        },
+        "id": 46,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sum(increase(ifHCInOctets{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"}[$__range]) * 8)",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "下行总流量",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+        },
+        "description": "该设备总丢包率",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-GrYlRd"
+            },
+            "decimals": 2,
+            "mappings": [],
+            "max": 10,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 16,
+          "y": 1
+        },
+        "id": 47,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "(\n  sum(increase(ifInDiscards{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"}[$__range]))\n  +\n  sum(increase(ifOutDiscards{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"}[$__range]))\n)\n/\n(\n  sum(increase(ifHCInUcastPkts{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"}[$__range]))\n  +\n  sum(increase(ifHCOutUcastPkts{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"}[$__range]))\n)\n* 100\n",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "当前设备丢包率",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+        },
+        "description": "该设备总错包率",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-GrYlRd"
+            },
+            "decimals": 2,
+            "mappings": [],
+            "max": 10,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 20,
+          "y": 1
+        },
+        "id": 48,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "(\n  sum(increase(ifInErrors{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"}[$__range]))\n  +\n  sum(increase(ifOutErrors{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"}[$__range]))\n)\n/\n(\n  sum(increase(ifHCInUcastPkts{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"}[$__range]))\n  +\n  sum(increase(ifHCOutUcastPkts{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"}[$__range]))\n)\n* 100\n",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "当前设备错包率",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+        },
+        "description": "指定接口流量",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": true,
+              "axisCenteredZero": false,
+              "axisColorMode": "series",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 100,
+              "gradientMode": "hue",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "smooth",
+              "lineStyle": {
+                "fill": "solid"
+              },
+              "lineWidth": 1,
+              "pointSize": 4,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": 3600000,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "decimals": 2,
+            "fieldMinMax": false,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "bps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 24,
+          "x": 0,
+          "y": 5
+        },
+        "id": 27,
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull",
+              "mean",
+              "min",
+              "max"
+            ],
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "irate(ifHCOutOctets{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\", ifName=~\"$interface\"}[5m]) * 8",
+            "format": "time_series",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "上行: {{ifName}}",
+            "range": true,
+            "refId": "A",
+            "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "-irate(ifHCInOctets{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\", ifName=~\"$interface\"}[5m]) * 8",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "下行: {{ifName}}",
+            "range": true,
+            "refId": "B",
+            "useBackend": false
+          }
+        ],
+        "title": "指定接口：{$interface} 上行/下行",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+        },
+        "description": "盒式交换机和框式交换机的部件都是以实体方式存在",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "instance"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth",
+                  "value": 120
+                },
+                {
+                  "id": "custom.width",
+                  "value": 120
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-text"
+                  }
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "purple",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "displayName",
+                  "value": "设备 IP"
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "sysName"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth"
+                },
+                {
+                  "id": "custom.width"
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-text"
+                  }
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "orange",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "displayName",
+                  "value": "设备名称"
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "entPhysicalName"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth",
+                  "value": 150
+                },
+                {
+                  "id": "custom.width",
+                  "value": 150
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-text"
+                  }
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "yellow",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "displayName",
+                  "value": "部件名称"
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Value"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth"
+                },
+                {
+                  "id": "custom.width"
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "applyToRow": false,
+                    "mode": "gradient",
+                    "type": "color-background",
+                    "wrapText": false
+                  }
+                },
+                {
+                  "id": "unit",
+                  "value": "天"
+                },
+                {
+                  "id": "displayName",
+                  "value": "启动时长"
+                },
+                {
+                  "id": "mappings",
+                  "value": [
+                    {
+                      "options": {
+                        "from": 0,
+                        "result": {
+                          "color": "red",
+                          "index": 0,
+                          "text": "2天内有离线"
+                        },
+                        "to": 2
+                      },
+                      "type": "range"
+                    }
+                  ]
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 8,
+          "x": 0,
+          "y": 14
+        },
+        "id": 18,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "enablePagination": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "(hh3cEntityExtUpTime{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} / 86400) * on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+            "format": "table",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "实体启动时间",
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true,
+                "auth": true,
+                "brand": true,
+                "entPhysicalIndex": true,
+                "hh3cEntityExtPhysicalIndex": true,
+                "job": true,
+                "module": true,
+                "region": true,
+                "role": true
+              },
+              "includeByName": {},
+              "indexByName": {
+                "Time": 0,
+                "Value": 11,
+                "auth": 1,
+                "brand": 2,
+                "entPhysicalIndex": 3,
+                "entPhysicalName": 10,
+                "instance": 8,
+                "job": 4,
+                "module": 5,
+                "region": 6,
+                "role": 7,
+                "sysName": 9
+              },
+              "renameByName": {}
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+        },
+        "description": "交换机设备序列号",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "instance"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth",
+                  "value": 120
+                },
+                {
+                  "id": "custom.width",
+                  "value": 120
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-text"
+                  }
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "purple",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "displayName",
+                  "value": "设备 IP"
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "sysName"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth"
+                },
+                {
+                  "id": "custom.width"
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-text"
+                  }
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "orange",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "displayName",
+                  "value": "设备名称"
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "entPhysicalName"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth",
+                  "value": 150
+                },
+                {
+                  "id": "custom.width",
+                  "value": 150
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-text"
+                  }
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "yellow",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "displayName",
+                  "value": "部件名称"
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "entPhysicalSerialNum"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth",
+                  "value": 240
+                },
+                {
+                  "id": "custom.width",
+                  "value": 240
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-text"
+                  }
+                },
+                {
+                  "id": "displayName",
+                  "value": "序列号"
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "green",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 8,
+          "x": 8,
+          "y": 14
+        },
+        "id": 31,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "enablePagination": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "entPhysicalSerialNum{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} * on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+            "format": "table",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "设备序列号",
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true,
+                "Value": true,
+                "auth": true,
+                "brand": true,
+                "entPhysicalIndex": true,
+                "job": true,
+                "module": true,
+                "region": true,
+                "role": true
+              },
+              "includeByName": {},
+              "indexByName": {
+                "Time": 0,
+                "Value": 12,
+                "auth": 1,
+                "brand": 2,
+                "entPhysicalIndex": 3,
+                "entPhysicalName": 10,
+                "entPhysicalSerialNum": 11,
+                "instance": 8,
+                "job": 4,
+                "module": 5,
+                "region": 6,
+                "role": 7,
+                "sysName": 9
+              },
+              "renameByName": {}
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+        },
+        "description": "交换机当前运行的系统版本号",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "fixedColor": "orange",
+              "mode": "fixed"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 8,
+          "x": 16,
+          "y": 14
+        },
+        "id": 30,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "name",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "entPhysicalSoftwareRev{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} * on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+            "format": "time_series",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": true,
+            "legendFormat": "{{entPhysicalSoftwareRev}}",
+            "range": false,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "软件版本号",
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true,
+                "auth": true,
+                "brand": true,
+                "entPhysicalIndex": true,
+                "job": true,
+                "module": true,
+                "region": true,
+                "role": true
+              },
+              "includeByName": {},
+              "indexByName": {
+                "Time": 0,
+                "Value": 11,
+                "auth": 1,
+                "brand": 2,
+                "entPhysicalIndex": 3,
+                "entPhysicalName": 10,
+                "instance": 8,
+                "job": 4,
+                "module": 5,
+                "region": 6,
+                "role": 7,
+                "sysName": 9
+              },
+              "renameByName": {}
+            }
+          }
+        ],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+        },
+        "description": "盒式交换机的板卡当前状态",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "1": {
+                    "color": "yellow",
+                    "index": 0,
+                    "text": "不支持"
+                  },
+                  "2": {
+                    "color": "green",
+                    "index": 1,
+                    "text": "在线"
+                  },
+                  "3": {
+                    "color": "orange",
+                    "index": 2,
+                    "text": "自检失败"
+                  },
+                  "4": {
+                    "color": "red",
+                    "index": 3,
+                    "text": "不在位"
+                  },
+                  "71": {
+                    "color": "red",
+                    "index": 4,
+                    "text": "板卡故障"
+                  }
+                },
+                "type": "value"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 8,
+          "x": 0,
+          "y": 19
+        },
+        "id": 32,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "value_and_name",
+          "wideLayout": false
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "hh3cEntityExtErrorStatus{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} * on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+            "format": "time_series",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": true,
+            "legendFormat": "{{entPhysicalName}}",
+            "range": false,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "板卡状态",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+        },
+        "description": "当前设备电源供电状态",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "1": {
+                    "color": "green",
+                    "index": 0,
+                    "text": "正在供电"
+                  },
+                  "2": {
+                    "color": "red",
+                    "index": 1,
+                    "text": "没有供电"
+                  },
+                  "3": {
+                    "color": "orange",
+                    "index": 2,
+                    "text": "没有安装"
+                  },
+                  "4": {
+                    "color": "yellow",
+                    "index": 3,
+                    "text": "不能支持"
+                  }
+                },
+                "type": "value"
+              },
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "color": "green",
+                    "index": 4,
+                    "text": "无法获取"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 8,
+          "x": 8,
+          "y": 19
+        },
+        "id": 29,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "value_and_name",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "hh3cDevMPowerStatus{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} * on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+            "format": "time_series",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": true,
+            "legendFormat": "{{sysName}} 编号-{{hh3cDevMPowerNum}}",
+            "range": false,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "电源供电状态",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+        },
+        "description": "当前设备风扇运行状态",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "1": {
+                    "color": "green",
+                    "index": 0,
+                    "text": "正常状态"
+                  },
+                  "2": {
+                    "color": "red",
+                    "index": 1,
+                    "text": "异常状态"
+                  },
+                  "3": {
+                    "color": "yellow",
+                    "index": 2,
+                    "text": "没有安装"
+                  },
+                  "4": {
+                    "color": "orange",
+                    "index": 3,
+                    "text": "不能支持"
+                  }
+                },
+                "type": "value"
+              },
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "color": "yellow",
+                    "index": 4,
+                    "text": "无法获取"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 8,
+          "x": 16,
+          "y": 19
+        },
+        "id": 34,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "value_and_name",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "hh3cDevMFanStatus{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} * on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+            "format": "time_series",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": true,
+            "legendFormat": "{{sysName}}  编号-{{hh3cDevMFanNum}}",
+            "range": false,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "风扇运行状态",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+        },
+        "description": "当前交换机设备 CPU 使用率",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "decimals": 2,
+            "mappings": [],
+            "thresholds": {
+              "mode": "percentage",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 50
+                },
+                {
+                  "color": "red",
+                  "value": 75
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 6,
+          "x": 0,
+          "y": 25
+        },
+        "id": 5,
+        "options": {
+          "minVizHeight": 75,
+          "minVizWidth": 75,
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "sizing": "auto"
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "hh3cEntityExtCpuUsage{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} * on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "{{entPhysicalName}}",
+            "range": true,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "CPU 使用率",
+        "type": "gauge"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+        },
+        "description": "当前交换机设备内存使用率",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "decimals": 2,
+            "fieldMinMax": false,
+            "mappings": [],
+            "thresholds": {
+              "mode": "percentage",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 60
+                },
+                {
+                  "color": "red",
+                  "value": 85
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 6,
+          "x": 6,
+          "y": 25
+        },
+        "id": 36,
+        "options": {
+          "minVizHeight": 75,
+          "minVizWidth": 75,
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "sizing": "auto"
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "hh3cEntityExtMemUsage{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} * on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "{{entPhysicalName}}",
+            "range": true,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "内存使用率",
+        "type": "gauge"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+        },
+        "description": "当前交换机实体部件温度",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 60
+                },
+                {
+                  "color": "red",
+                  "value": 70
+                }
+              ]
+            },
+            "unit": "celsius"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 7,
+          "x": 12,
+          "y": 25
+        },
+        "id": 37,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "value_and_name",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "hh3cEntityExtTemperature{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} * on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "{{entPhysicalName}}",
+            "range": true,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "实时温度",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+        },
+        "description": "设备 MAC 表项使用数量除以交换机限制总数",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "color": "red",
+                    "index": 0,
+                    "text": "无法获取"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "max": 100,
+            "min": 0,
+            "thresholds": {
+              "mode": "percentage",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "yellow",
+                  "value": 70
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 5,
+          "x": 19,
+          "y": 25
+        },
+        "id": 16,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": true,
+          "textMode": "value_and_name",
+          "wideLayout": false
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "(\n  sum by (instance) (\n    hh3cEntityExtMacAddressCount{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"}\n  )\n)\n/\n(\n  sum by (instance) (\n    hh3cMaxMacLearnRange{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"}\n  )\n)\n* on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "{{sysName}}",
+            "range": true,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "MAC 表项使用率",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+        },
+        "description": "交换机设备存储使用率",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "decimals": 2,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 95
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 12,
+          "x": 0,
+          "y": 31
+        },
+        "id": 40,
+        "options": {
+          "minVizHeight": 75,
+          "minVizWidth": 75,
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "sizing": "auto"
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "((hh3cFlhPartSpace{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} - hh3cFlhPartSpaceFree{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"}) / hh3cFlhPartSpace{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"}  * 100) * on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+            "format": "time_series",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "instant": true,
+            "legendFormat": "{{hh3cFlhPartName}}",
+            "range": false,
+            "refId": "B",
+            "useBackend": false
+          }
+        ],
+        "title": "存储使用率",
+        "type": "gauge"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+        },
+        "description": "交换机设备存储容量情况",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "instance"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth",
+                  "value": 120
+                },
+                {
+                  "id": "custom.width",
+                  "value": 120
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-text"
+                  }
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "purple",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "displayName",
+                  "value": "设备 IP"
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "sysName"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth"
+                },
+                {
+                  "id": "custom.width"
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-text"
+                  }
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "blue",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "displayName",
+                  "value": "设备名称"
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "hh3cFlhPartName"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth",
+                  "value": 150
+                },
+                {
+                  "id": "custom.width",
+                  "value": 150
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-text"
+                  }
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "yellow",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "displayName",
+                  "value": "部件名称"
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Value #A"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth",
+                  "value": 100
+                },
+                {
+                  "id": "custom.width",
+                  "value": 100
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-text"
+                  }
+                },
+                {
+                  "id": "displayName",
+                  "value": "存储状态"
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                },
+                {
+                  "id": "mappings",
+                  "value": [
+                    {
+                      "options": {
+                        "1": {
+                          "color": "red",
+                          "index": 0,
+                          "text": "只读"
+                        },
+                        "2": {
+                          "color": "purple",
+                          "index": 1,
+                          "text": "闪存运行"
+                        },
+                        "3": {
+                          "color": "green",
+                          "index": 2,
+                          "text": "读写"
+                        }
+                      },
+                      "type": "value"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Value #B"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth",
+                  "value": 120
+                },
+                {
+                  "id": "custom.width",
+                  "value": 120
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-text"
+                  }
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "green",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "unit",
+                  "value": "decbytes"
+                },
+                {
+                  "id": "displayName",
+                  "value": "剩余空间"
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Value #C"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth"
+                },
+                {
+                  "id": "custom.width"
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-text"
+                  }
+                },
+                {
+                  "id": "unit",
+                  "value": "decbytes"
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "orange",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "displayName",
+                  "value": "总空间"
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 12,
+          "x": 12,
+          "y": 31
+        },
+        "id": 41,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "enablePagination": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "hh3cFlhPartStatus{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} * on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+            "format": "table",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "A",
+            "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "hh3cFlhPartSpaceFree{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} * on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+            "format": "table",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "B",
+            "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "hh3cFlhPartSpace{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} * on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+            "format": "table",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "C",
+            "useBackend": false
+          }
+        ],
+        "title": "设备存储容量",
+        "transformations": [
+          {
+            "id": "merge",
+            "options": {}
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true,
+                "Value": true,
+                "auth": true,
+                "brand": true,
+                "entPhysicalIndex": true,
+                "hh3cFlhIndex": true,
+                "hh3cFlhPartIndex": true,
+                "hwStorageIndex": true,
+                "job": true,
+                "module": true,
+                "region": true,
+                "role": true
+              },
+              "includeByName": {},
+              "indexByName": {
+                "Time": 0,
+                "Value": 12,
+                "auth": 1,
+                "brand": 2,
+                "entPhysicalIndex": 3,
+                "entPhysicalName": 10,
+                "entPhysicalSerialNum": 11,
+                "instance": 8,
+                "job": 4,
+                "module": 5,
+                "region": 6,
+                "role": 7,
+                "sysName": 9
+              },
+              "renameByName": {
+                "job": ""
+              }
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+        },
+        "description": "设备接口信息",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "center",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "filterable": false,
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "instance (lastNotNull)"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth",
+                  "value": 120
+                },
+                {
+                  "id": "custom.width",
+                  "value": 120
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-text"
+                  }
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "purple",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "displayName",
+                  "value": "设备 IP"
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "sysName (lastNotNull)"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth"
+                },
+                {
+                  "id": "custom.width"
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "displayName",
+                  "value": "设备名称"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-text"
+                  }
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "blue",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "ifName (lastNotNull)"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth"
+                },
+                {
+                  "id": "custom.width"
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-text"
+                  }
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "#9eff03",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "displayName",
+                  "value": "接口名称"
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Value #A (lastNotNull)"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth"
+                },
+                {
+                  "id": "custom.width"
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "applyToRow": false,
+                    "type": "color-background",
+                    "wrapText": false
+                  }
+                },
+                {
+                  "id": "mappings",
+                  "value": [
+                    {
+                      "options": {
+                        "1": {
+                          "color": "green",
+                          "index": 0,
+                          "text": "Up"
+                        },
+                        "2": {
+                          "color": "red",
+                          "index": 1,
+                          "text": "Down"
+                        },
+                        "3": {
+                          "color": "yellow",
+                          "index": 2,
+                          "text": "Testing"
+                        }
+                      },
+                      "type": "value"
+                    }
+                  ]
+                },
+                {
+                  "id": "displayName",
+                  "value": "接口状态"
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Value #B (lastNotNull)"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth",
+                  "value": 120
+                },
+                {
+                  "id": "custom.width",
+                  "value": 120
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-text"
+                  }
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "orange",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "unit",
+                  "value": "bps"
+                },
+                {
+                  "id": "displayName",
+                  "value": "上行带宽"
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Value #C (lastNotNull)"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth",
+                  "value": 120
+                },
+                {
+                  "id": "custom.width",
+                  "value": 120
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-text"
+                  }
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "yellow",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "unit",
+                  "value": "bps"
+                },
+                {
+                  "id": "displayName",
+                  "value": "下行带宽"
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Value #D (lastNotNull)"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth",
+                  "value": 100
+                },
+                {
+                  "id": "custom.width",
+                  "value": 100
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-text"
+                  }
+                },
+                {
+                  "id": "unit",
+                  "value": "Mbits"
+                },
+                {
+                  "id": "displayName",
+                  "value": "接口速率"
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "green",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 36
+        },
+        "id": 11,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "enablePagination": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true,
+          "sortBy": []
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "ifOperStatus{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} * on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+            "format": "table",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "A",
+            "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "irate(ifHCOutOctets{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} * on(instance) group_left(sysName) sysName{sysName!=\"\"}[5m]) * 8",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "irate(ifHCInOctets{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} * on(instance) group_left(sysName) sysName{sysName!=\"\"}[5m]) * 8",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "ifHighSpeed{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} * on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "D"
+          }
+        ],
+        "title": "接口信息汇总",
+        "transformations": [
+          {
+            "id": "merge",
+            "options": {}
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Value #A": {
+                  "aggregations": [
+                    "lastNotNull"
+                  ],
+                  "operation": "aggregate"
+                },
+                "Value #B": {
+                  "aggregations": [
+                    "lastNotNull"
+                  ],
+                  "operation": "aggregate"
+                },
+                "Value #C": {
+                  "aggregations": [
+                    "lastNotNull"
+                  ],
+                  "operation": "aggregate"
+                },
+                "Value #D": {
+                  "aggregations": [
+                    "lastNotNull"
+                  ],
+                  "operation": "aggregate"
+                },
+                "Value #E": {
+                  "aggregations": [
+                    "lastNotNull"
+                  ],
+                  "operation": "aggregate"
+                },
+                "hwIfMonitorIndex": {
+                  "aggregations": [
+                    "lastNotNull"
+                  ]
+                },
+                "ifIndex": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                },
+                "ifName": {
+                  "aggregations": [
+                    "lastNotNull"
+                  ],
+                  "operation": "aggregate"
+                },
+                "instance": {
+                  "aggregations": [
+                    "lastNotNull"
+                  ],
+                  "operation": "aggregate"
+                },
+                "sysName": {
+                  "aggregations": [
+                    "lastNotNull"
+                  ],
+                  "operation": "aggregate"
+                }
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Value #E (lastNotNull)": false,
+                "ifIndex": true
+              },
+              "includeByName": {},
+              "indexByName": {
+                "Value #A (lastNotNull)": 4,
+                "Value #B (lastNotNull)": 5,
+                "Value #C (lastNotNull)": 6,
+                "Value #D (lastNotNull)": 7,
+                "Value #E (lastNotNull)": 8,
+                "ifIndex": 0,
+                "ifName (lastNotNull)": 3,
+                "instance (lastNotNull)": 1,
+                "sysName (lastNotNull)": 2
+              },
+              "renameByName": {}
+            }
+          },
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "isNotNull",
+                    "options": {}
+                  },
+                  "fieldName": "Value #A (lastNotNull)"
+                },
+                {
+                  "config": {
+                    "id": "regex",
+                    "options": {
+                      "value": "(Eth-.*|.*Ethernet.*|.*GE.*)"
+                    }
+                  },
+                  "fieldName": "ifName (lastNotNull)"
+                }
+              ],
+              "match": "all",
+              "type": "include"
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+        },
+        "description": "交换机汇总信息",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "center",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "filterable": false,
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "instance"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth"
+                },
+                {
+                  "id": "custom.width"
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-text"
+                  }
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "purple",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                },
+                {
+                  "id": "displayName",
+                  "value": "设备 IP"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "sysName"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth"
+                },
+                {
+                  "id": "custom.width"
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-text"
+                  }
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "blue",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "displayName",
+                  "value": "设备名称"
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "entPhysicalName (lastNotNull)"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth"
+                },
+                {
+                  "id": "custom.width"
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-text"
+                  }
+                },
+                {
+                  "id": "displayName",
+                  "value": "板卡名称"
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "green",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Value #A (lastNotNull)"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth"
+                },
+                {
+                  "id": "custom.width"
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "type": "color-text"
+                  }
+                },
+                {
+                  "id": "unit",
+                  "value": "天"
+                },
+                {
+                  "id": "mappings",
+                  "value": [
+                    {
+                      "options": {
+                        "from": 0,
+                        "result": {
+                          "color": "red",
+                          "index": 0,
+                          "text": "2天内有离线"
+                        },
+                        "to": 2
+                      },
+                      "type": "range"
+                    }
+                  ]
+                },
+                {
+                  "id": "color"
+                },
+                {
+                  "id": "displayName",
+                  "value": "启动时长"
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Value #B (lastNotNull)"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth"
+                },
+                {
+                  "id": "custom.width"
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "mode": "lcd",
+                    "type": "gauge",
+                    "valueDisplayMode": "color"
+                  }
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "mode": "continuous-GrYlRd"
+                  }
+                },
+                {
+                  "id": "min",
+                  "value": 0
+                },
+                {
+                  "id": "max",
+                  "value": 100
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                },
+                {
+                  "id": "displayName",
+                  "value": "CPU 使用率"
+                },
+                {
+                  "id": "unit",
+                  "value": "percent"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Value #C (lastNotNull)"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth"
+                },
+                {
+                  "id": "custom.width"
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "mode": "lcd",
+                    "type": "gauge",
+                    "valueDisplayMode": "color"
+                  }
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "mode": "continuous-GrYlRd"
+                  }
+                },
+                {
+                  "id": "min",
+                  "value": 0
+                },
+                {
+                  "id": "max",
+                  "value": 99
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                },
+                {
+                  "id": "displayName",
+                  "value": "内存使用率"
+                },
+                {
+                  "id": "unit",
+                  "value": "percent"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Value #D (lastNotNull)"
+              },
+              "properties": [
+                {
+                  "id": "custom.minWidth"
+                },
+                {
+                  "id": "custom.width"
+                },
+                {
+                  "id": "custom.align",
+                  "value": "center"
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "mode": "gradient",
+                    "type": "color-background"
+                  }
+                },
+                {
+                  "id": "mappings",
+                  "value": [
+                    {
+                      "options": {
+                        "1": {
+                          "color": "green",
+                          "index": 0,
+                          "text": "在线"
+                        },
+                        "2": {
+                          "color": "red",
+                          "index": 1,
+                          "text": "离线"
+                        }
+                      },
+                      "type": "value"
+                    }
+                  ]
+                },
+                {
+                  "id": "displayName",
+                  "value": "Ping 探测"
+                },
+                {
+                  "id": "noValue",
+                  "value": "N/A"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 36
+        },
+        "id": 1,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "enablePagination": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "11.5.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "(hh3cEntityExtUpTime{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\"} / 86400) * on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+            "format": "table",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "instant": true,
+            "legendFormat": "启动(天)",
+            "range": false,
+            "refId": "A",
+            "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "hh3cEntityExtCpuUsage{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\"} * on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+            "format": "table",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "instant": true,
+            "legendFormat": "CPU 使用率",
+            "range": false,
+            "refId": "B",
+            "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "hh3cEntityExtMemUsage{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\"} * on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+            "format": "table",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "instant": true,
+            "legendFormat": "内存使用率",
+            "range": false,
+            "refId": "C",
+            "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "disableTextWrap": false,
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sysName{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\"} * on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+            "format": "table",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "instant": true,
+            "legendFormat": "PING 连通性",
+            "range": false,
+            "refId": "D",
+            "useBackend": false
+          }
+        ],
+        "title": "交换机汇总【总数：$total】",
+        "transformations": [
+          {
+            "id": "merge",
+            "options": {}
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Value #A": {
+                  "aggregations": [
+                    "lastNotNull"
+                  ],
+                  "operation": "aggregate"
+                },
+                "Value #B": {
+                  "aggregations": [
+                    "lastNotNull"
+                  ],
+                  "operation": "aggregate"
+                },
+                "Value #C": {
+                  "aggregations": [
+                    "lastNotNull"
+                  ],
+                  "operation": "aggregate"
+                },
+                "Value #D": {
+                  "aggregations": [
+                    "lastNotNull"
+                  ],
+                  "operation": "aggregate"
+                },
+                "entPhysicalIndex": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                },
+                "entPhysicalName": {
+                  "aggregations": [
+                    "lastNotNull"
+                  ],
+                  "operation": "aggregate"
+                },
+                "hh3cEntityExtPhysicalIndex": {
+                  "aggregations": []
+                },
+                "instance": {
+                  "aggregations": [
+                    "lastNotNull"
+                  ],
+                  "operation": "groupby"
+                },
+                "sysName": {
+                  "aggregations": [
+                    "lastNotNull"
+                  ],
+                  "operation": "groupby"
+                }
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Value": false,
+                "entPhysicalIndex": true
+              },
+              "includeByName": {},
+              "indexByName": {},
+              "renameByName": {}
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 45
+        },
+        "id": 38,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "description": "",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "align": "auto",
+                  "cellOptions": {
+                    "type": "auto"
+                  },
+                  "filterable": false,
+                  "inspect": false
+                },
+                "displayName": "",
+                "fieldMinMax": false,
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    }
+                  ]
+                }
+              },
+              "overrides": [
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "region (lastNotNull)"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.minWidth"
+                    },
+                    {
+                      "id": "custom.width"
+                    },
+                    {
+                      "id": "custom.align",
+                      "value": "center"
+                    },
+                    {
+                      "id": "displayName",
+                      "value": "区域"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "type": "color-text"
+                      }
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "fixedColor": "purple",
+                        "mode": "fixed"
+                      }
+                    },
+                    {
+                      "id": "noValue",
+                      "value": "N/A"
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "brand (lastNotNull)"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.minWidth"
+                    },
+                    {
+                      "id": "custom.width"
+                    },
+                    {
+                      "id": "custom.align",
+                      "value": "center"
+                    },
+                    {
+                      "id": "displayName",
+                      "value": "品牌"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "type": "color-text"
+                      }
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "fixedColor": "blue",
+                        "mode": "fixed"
+                      }
+                    },
+                    {
+                      "id": "noValue",
+                      "value": "N/A"
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "role (lastNotNull)"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.minWidth"
+                    },
+                    {
+                      "id": "custom.width"
+                    },
+                    {
+                      "id": "custom.align",
+                      "value": "center"
+                    },
+                    {
+                      "id": "displayName",
+                      "value": "角色"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "type": "color-text"
+                      }
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "fixedColor": "green",
+                        "mode": "fixed"
+                      }
+                    },
+                    {
+                      "id": "noValue",
+                      "value": "N/A"
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "instance"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.minWidth"
+                    },
+                    {
+                      "id": "custom.width"
+                    },
+                    {
+                      "id": "custom.align",
+                      "value": "center"
+                    },
+                    {
+                      "id": "displayName",
+                      "value": "设备实例 IP"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "type": "color-text"
+                      }
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "fixedColor": "yellow",
+                        "mode": "fixed"
+                      }
+                    },
+                    {
+                      "id": "noValue",
+                      "value": "N/A"
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "ifName"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.minWidth"
+                    },
+                    {
+                      "id": "custom.width"
+                    },
+                    {
+                      "id": "custom.align",
+                      "value": "center"
+                    },
+                    {
+                      "id": "displayName",
+                      "value": "接口名称"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "type": "color-text"
+                      }
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "fixedColor": "orange",
+                        "mode": "fixed"
+                      }
+                    },
+                    {
+                      "id": "noValue",
+                      "value": "N/A"
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Value #A (lastNotNull)"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.minWidth"
+                    },
+                    {
+                      "id": "custom.width"
+                    },
+                    {
+                      "id": "custom.align",
+                      "value": "center"
+                    },
+                    {
+                      "id": "displayName",
+                      "value": "出站速率"
+                    },
+                    {
+                      "id": "unit",
+                      "value": "bps"
+                    },
+                    {
+                      "id": "custom.inspect",
+                      "value": true
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "applyToRow": false,
+                        "mode": "basic",
+                        "type": "color-background",
+                        "wrapText": false
+                      }
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "mode": "continuous-BlYlRd"
+                      }
+                    },
+                    {
+                      "id": "min",
+                      "value": 0
+                    },
+                    {
+                      "id": "max",
+                      "value": 1000000000
+                    },
+                    {
+                      "id": "noValue",
+                      "value": "N/A"
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Value #B (lastNotNull)"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.minWidth"
+                    },
+                    {
+                      "id": "custom.width"
+                    },
+                    {
+                      "id": "custom.align",
+                      "value": "center"
+                    },
+                    {
+                      "id": "displayName",
+                      "value": "入站速率"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "applyToRow": false,
+                        "mode": "basic",
+                        "type": "color-background",
+                        "wrapText": false
+                      }
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "mode": "continuous-YlBl"
+                      }
+                    },
+                    {
+                      "id": "unit",
+                      "value": "bps"
+                    },
+                    {
+                      "id": "min",
+                      "value": 0
+                    },
+                    {
+                      "id": "max",
+                      "value": 1000000000
+                    },
+                    {
+                      "id": "noValue",
+                      "value": "N/A"
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Value #C (lastNotNull)"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.minWidth"
+                    },
+                    {
+                      "id": "custom.width"
+                    },
+                    {
+                      "id": "custom.align",
+                      "value": "center"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "type": "color-text"
+                      }
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "fixedColor": "dark-orange",
+                        "mode": "fixed"
+                      }
+                    },
+                    {
+                      "id": "unit",
+                      "value": "decbits"
+                    },
+                    {
+                      "id": "displayName",
+                      "value": "出站总流量"
+                    },
+                    {
+                      "id": "noValue",
+                      "value": "N/A"
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Value #D (lastNotNull)"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.minWidth"
+                    },
+                    {
+                      "id": "custom.width"
+                    },
+                    {
+                      "id": "custom.align",
+                      "value": "center"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "type": "color-text"
+                      }
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "fixedColor": "dark-yellow",
+                        "mode": "fixed"
+                      }
+                    },
+                    {
+                      "id": "unit",
+                      "value": "decbits"
+                    },
+                    {
+                      "id": "displayName",
+                      "value": "入站总流量"
+                    },
+                    {
+                      "id": "noValue",
+                      "value": "N/A"
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Value #E (lastNotNull)"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.minWidth"
+                    },
+                    {
+                      "id": "custom.width"
+                    },
+                    {
+                      "id": "custom.align",
+                      "value": "center"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "type": "color-text"
+                      }
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "fixedColor": "purple",
+                        "mode": "fixed"
+                      }
+                    },
+                    {
+                      "id": "unit",
+                      "value": "Mbits"
+                    },
+                    {
+                      "id": "displayName",
+                      "value": "接口速率"
+                    },
+                    {
+                      "id": "noValue",
+                      "value": "N/A"
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Value #F (lastNotNull)"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.minWidth"
+                    },
+                    {
+                      "id": "custom.width"
+                    },
+                    {
+                      "id": "custom.align",
+                      "value": "center"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "applyToRow": false,
+                        "type": "color-background"
+                      }
+                    },
+                    {
+                      "id": "mappings",
+                      "value": [
+                        {
+                          "options": {
+                            "1": {
+                              "color": "green",
+                              "index": 0,
+                              "text": "Up"
+                            },
+                            "2": {
+                              "color": "red",
+                              "index": 1,
+                              "text": "Down"
+                            },
+                            "3": {
+                              "color": "yellow",
+                              "index": 2,
+                              "text": "Testing"
+                            }
+                          },
+                          "type": "value"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "displayName",
+                      "value": "接口工作状态"
+                    },
+                    {
+                      "id": "noValue",
+                      "value": "N/A"
+                    }
+                  ]
+                }
+              ]
+            },
+            "gridPos": {
+              "h": 5,
+              "w": 24,
+              "x": 0,
+              "y": 46
+            },
+            "id": 42,
+            "options": {
+              "cellHeight": "sm",
+              "footer": {
+                "countRows": false,
+                "enablePagination": true,
+                "fields": "",
+                "reducer": [
+                  "sum"
+                ],
+                "show": false
+              },
+              "showHeader": true,
+              "sortBy": []
+            },
+            "pluginVersion": "11.5.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+                },
+                "editorMode": "code",
+                "exemplar": true,
+                "expr": "irate(ifHCOutOctets{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\", ifName=~\"$interface\"}[5m]) * 8",
+                "format": "table",
+                "instant": true,
+                "interval": "",
+                "legendFormat": "上行带宽",
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+                },
+                "editorMode": "code",
+                "exemplar": true,
+                "expr": "irate(ifHCInOctets{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\", ifName=~\"$interface\"}[5m]) * 8",
+                "format": "table",
+                "instant": true,
+                "interval": "",
+                "legendFormat": "下行带宽",
+                "refId": "B"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+                },
+                "editorMode": "code",
+                "exemplar": true,
+                "expr": "ifHCOutOctets{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\", ifName=~\"$interface\"} * 8",
+                "format": "table",
+                "hide": false,
+                "instant": true,
+                "interval": "",
+                "legendFormat": "总上行流量",
+                "refId": "C"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+                },
+                "editorMode": "code",
+                "exemplar": true,
+                "expr": "ifHCInOctets{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\", ifName=~\"$interface\"} * 8",
+                "format": "table",
+                "hide": false,
+                "instant": true,
+                "interval": "",
+                "legendFormat": "总下行流量",
+                "refId": "D"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+                },
+                "editorMode": "code",
+                "exemplar": true,
+                "expr": "ifHighSpeed{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\", ifName=~\"$interface\"}",
+                "format": "table",
+                "hide": false,
+                "instant": true,
+                "interval": "",
+                "legendFormat": "__auto",
+                "refId": "E"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+                },
+                "editorMode": "code",
+                "exemplar": true,
+                "expr": "ifOperStatus{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\", ifName=~\"$interface\"}",
+                "format": "table",
+                "hide": false,
+                "instant": true,
+                "interval": "",
+                "legendFormat": "__auto",
+                "refId": "F"
+              }
+            ],
+            "title": "指定接口流量和 - 5分钟",
+            "transformations": [
+              {
+                "id": "merge",
+                "options": {}
+              },
+              {
+                "id": "groupBy",
+                "options": {
+                  "fields": {
+                    "Value #A": {
+                      "aggregations": [
+                        "lastNotNull"
+                      ],
+                      "operation": "aggregate"
+                    },
+                    "Value #B": {
+                      "aggregations": [
+                        "lastNotNull"
+                      ],
+                      "operation": "aggregate"
+                    },
+                    "Value #C": {
+                      "aggregations": [
+                        "lastNotNull"
+                      ],
+                      "operation": "aggregate"
+                    },
+                    "Value #D": {
+                      "aggregations": [
+                        "lastNotNull"
+                      ],
+                      "operation": "aggregate"
+                    },
+                    "Value #E": {
+                      "aggregations": [
+                        "lastNotNull"
+                      ],
+                      "operation": "aggregate"
+                    },
+                    "Value #F": {
+                      "aggregations": [
+                        "lastNotNull"
+                      ],
+                      "operation": "aggregate"
+                    },
+                    "adIfName": {
+                      "aggregations": [],
+                      "operation": "groupby"
+                    },
+                    "adLinkIfName": {
+                      "aggregations": [
+                        "lastNotNull"
+                      ],
+                      "operation": "aggregate"
+                    },
+                    "adLinkName": {
+                      "aggregations": [
+                        "lastNotNull"
+                      ],
+                      "operation": "aggregate"
+                    },
+                    "brand": {
+                      "aggregations": [
+                        "lastNotNull"
+                      ],
+                      "operation": "aggregate"
+                    },
+                    "ifIndex": {
+                      "aggregations": [],
+                      "operation": "groupby"
+                    },
+                    "ifName": {
+                      "aggregations": [],
+                      "operation": "groupby"
+                    },
+                    "instance": {
+                      "aggregations": [],
+                      "operation": "groupby"
+                    },
+                    "job": {
+                      "aggregations": []
+                    },
+                    "region": {
+                      "aggregations": [
+                        "lastNotNull"
+                      ],
+                      "operation": "aggregate"
+                    },
+                    "role": {
+                      "aggregations": [
+                        "lastNotNull"
+                      ],
+                      "operation": "aggregate"
+                    }
+                  }
+                }
+              },
+              {
+                "id": "organize",
+                "options": {
+                  "excludeByName": {
+                    "ifIndex": true
+                  },
+                  "includeByName": {},
+                  "indexByName": {
+                    "Value #A (lastNotNull)": 5,
+                    "Value #B (lastNotNull)": 6,
+                    "Value #C (lastNotNull)": 7,
+                    "Value #D (lastNotNull)": 8,
+                    "Value #E (lastNotNull)": 9,
+                    "brand (lastNotNull)": 1,
+                    "ifIndex": 10,
+                    "ifName": 4,
+                    "instance": 3,
+                    "region (lastNotNull)": 0,
+                    "role (lastNotNull)": 2
+                  },
+                  "renameByName": {}
+                }
+              }
+            ],
+            "type": "table"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "description": "指定接口流量",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": true,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "series",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "barWidthFactor": 0.6,
+                  "drawStyle": "line",
+                  "fillOpacity": 100,
+                  "gradientMode": "hue",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "insertNulls": false,
+                  "lineInterpolation": "smooth",
+                  "lineStyle": {
+                    "fill": "solid"
+                  },
+                  "lineWidth": 1,
+                  "pointSize": 4,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "never",
+                  "spanNulls": 3600000,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "decimals": 2,
+                "fieldMinMax": false,
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    }
+                  ]
+                },
+                "unit": "bps"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 9,
+              "w": 24,
+              "x": 0,
+              "y": 61
+            },
+            "id": 39,
+            "options": {
+              "legend": {
+                "calcs": [
+                  "lastNotNull",
+                  "mean",
+                  "min",
+                  "max"
+                ],
+                "displayMode": "table",
+                "placement": "right",
+                "showLegend": true
+              },
+              "tooltip": {
+                "hideZeros": false,
+                "mode": "multi",
+                "sort": "desc"
+              }
+            },
+            "pluginVersion": "11.5.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+                },
+                "disableTextWrap": false,
+                "editorMode": "code",
+                "exemplar": false,
+                "expr": "irate(ifHCOutOctets{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\", ifName=~\"$interface\"}[5m]) * 8",
+                "format": "time_series",
+                "fullMetaSearch": false,
+                "hide": false,
+                "includeNullMetadata": true,
+                "instant": false,
+                "legendFormat": "上行: {{ifName}}",
+                "range": true,
+                "refId": "A",
+                "useBackend": false
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+                },
+                "disableTextWrap": false,
+                "editorMode": "code",
+                "exemplar": false,
+                "expr": "-irate(ifHCInOctets{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\", ifName=~\"$interface\"}[5m]) * 8",
+                "fullMetaSearch": false,
+                "hide": false,
+                "includeNullMetadata": true,
+                "instant": false,
+                "legendFormat": "下行: {{ifName}}",
+                "range": true,
+                "refId": "B",
+                "useBackend": false
+              }
+            ],
+            "title": "指定接口：{$interface} 上行/下行",
+            "type": "timeseries"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "description": "当前交换机接口（5分钟内）带宽占用率排序前十",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "continuous-GrYlRd"
+                },
+                "fieldMinMax": false,
+                "mappings": [],
+                "max": 100,
+                "min": 0,
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    }
+                  ]
+                },
+                "unit": "percent"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 70
+            },
+            "id": 13,
+            "options": {
+              "displayMode": "lcd",
+              "legend": {
+                "calcs": [],
+                "displayMode": "list",
+                "placement": "bottom",
+                "showLegend": false
+              },
+              "maxVizHeight": 150,
+              "minVizHeight": 12,
+              "minVizWidth": 8,
+              "namePlacement": "left",
+              "orientation": "horizontal",
+              "reduceOptions": {
+                "calcs": [
+                  "lastNotNull"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "showUnfilled": true,
+              "sizing": "auto",
+              "valueMode": "color"
+            },
+            "pluginVersion": "11.5.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+                },
+                "editorMode": "code",
+                "exemplar": false,
+                "expr": "topk(10, irate(ifHCOutOctets{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"}) / (ifHighSpeed{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} * 1000))",
+                "instant": true,
+                "legendFormat": "{{ifName}}        ",
+                "range": false,
+                "refId": "A"
+              }
+            ],
+            "title": "上行带宽占用率（当前-Top10）",
+            "type": "bargauge"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "description": "当前交换机接口（5分钟内）带宽使用率排序前十",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "continuous-GrYlRd"
+                },
+                "fieldMinMax": false,
+                "mappings": [],
+                "max": 100,
+                "min": 0,
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    }
+                  ]
+                },
+                "unit": "percent"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 70
+            },
+            "id": 10,
+            "options": {
+              "displayMode": "lcd",
+              "legend": {
+                "calcs": [],
+                "displayMode": "list",
+                "placement": "bottom",
+                "showLegend": false
+              },
+              "maxVizHeight": 150,
+              "minVizHeight": 12,
+              "minVizWidth": 8,
+              "namePlacement": "left",
+              "orientation": "horizontal",
+              "reduceOptions": {
+                "calcs": [
+                  "lastNotNull"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "showUnfilled": true,
+              "sizing": "auto",
+              "valueMode": "color"
+            },
+            "pluginVersion": "11.5.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+                },
+                "editorMode": "code",
+                "exemplar": false,
+                "expr": "topk(10, irate(ifHCInOctets{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"}) / (ifHighSpeed{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} * 1000))",
+                "instant": true,
+                "legendFormat": "{{ifName}}",
+                "range": false,
+                "refId": "A"
+              }
+            ],
+            "title": "下行带宽占用率（当前-Top10）",
+            "type": "bargauge"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "description": "当前交换机接口流量排序前十",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "fieldMinMax": false,
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "purple"
+                    },
+                    {
+                      "color": "#EAB839",
+                      "value": 800000000
+                    },
+                    {
+                      "color": "red",
+                      "value": 900000000
+                    }
+                  ]
+                },
+                "unit": "bps"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 78
+            },
+            "id": 20,
+            "options": {
+              "displayMode": "gradient",
+              "legend": {
+                "calcs": [],
+                "displayMode": "list",
+                "placement": "bottom",
+                "showLegend": false
+              },
+              "maxVizHeight": 50,
+              "minVizHeight": 10,
+              "minVizWidth": 8,
+              "namePlacement": "left",
+              "orientation": "horizontal",
+              "reduceOptions": {
+                "calcs": [
+                  "lastNotNull"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "showUnfilled": false,
+              "sizing": "manual",
+              "valueMode": "color"
+            },
+            "pluginVersion": "11.5.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+                },
+                "editorMode": "code",
+                "exemplar": false,
+                "expr": "topk(10, irate(ifHCOutOctets{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"}[5m]) * 8)",
+                "instant": true,
+                "legendFormat": "{{ifName}}        ",
+                "range": false,
+                "refId": "A"
+              }
+            ],
+            "title": "上行（当前-Top10）",
+            "type": "bargauge"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "description": "当前交换机接口流量排序前十",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "fieldMinMax": false,
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "purple"
+                    },
+                    {
+                      "color": "#EAB839",
+                      "value": 800000000
+                    },
+                    {
+                      "color": "red",
+                      "value": 900000000
+                    }
+                  ]
+                },
+                "unit": "bps"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 78
+            },
+            "id": 21,
+            "options": {
+              "displayMode": "gradient",
+              "legend": {
+                "calcs": [],
+                "displayMode": "list",
+                "placement": "bottom",
+                "showLegend": false
+              },
+              "maxVizHeight": 50,
+              "minVizHeight": 10,
+              "minVizWidth": 8,
+              "namePlacement": "left",
+              "orientation": "horizontal",
+              "reduceOptions": {
+                "calcs": [
+                  "lastNotNull"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "showUnfilled": false,
+              "sizing": "manual",
+              "valueMode": "color"
+            },
+            "pluginVersion": "11.5.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+                },
+                "editorMode": "code",
+                "exemplar": false,
+                "expr": "topk(10, irate(ifHCInOctets{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"}[5m]) * 8)",
+                "instant": true,
+                "legendFormat": "{{ifName}}        ",
+                "range": false,
+                "refId": "A"
+              }
+            ],
+            "title": "下行（当前-Top10）",
+            "type": "bargauge"
+          }
+        ],
+        "title": "交换机接口信息",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 46
+        },
+        "id": 25,
+        "panels": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+            },
+            "description": "当前交换机中存在的光模块信息",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "align": "center",
+                  "cellOptions": {
+                    "type": "auto"
+                  },
+                  "inspect": false
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    }
+                  ]
+                }
+              },
+              "overrides": [
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "instance"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.minWidth"
+                    },
+                    {
+                      "id": "custom.width"
+                    },
+                    {
+                      "id": "custom.align",
+                      "value": "center"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "type": "color-text"
+                      }
+                    },
+                    {
+                      "id": "displayName",
+                      "value": "设备 IP"
+                    },
+                    {
+                      "id": "noValue",
+                      "value": "N/A"
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "fixedColor": "purple",
+                        "mode": "fixed"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "sysName (lastNotNull)"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.minWidth"
+                    },
+                    {
+                      "id": "custom.width"
+                    },
+                    {
+                      "id": "custom.align",
+                      "value": "center"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "type": "color-text"
+                      }
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "fixedColor": "blue",
+                        "mode": "fixed"
+                      }
+                    },
+                    {
+                      "id": "displayName",
+                      "value": "设备名称"
+                    },
+                    {
+                      "id": "noValue",
+                      "value": "N/A"
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "ifName (lastNotNull)"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.minWidth"
+                    },
+                    {
+                      "id": "custom.width"
+                    },
+                    {
+                      "id": "custom.align",
+                      "value": "center"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "type": "color-text"
+                      }
+                    },
+                    {
+                      "id": "displayName",
+                      "value": "接口名称"
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "fixedColor": "green",
+                        "mode": "fixed"
+                      }
+                    },
+                    {
+                      "id": "noValue",
+                      "value": "N/A"
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Value #A (lastNotNull)"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.minWidth"
+                    },
+                    {
+                      "id": "custom.align",
+                      "value": "center"
+                    },
+                    {
+                      "id": "custom.width"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "type": "color-text"
+                      }
+                    },
+                    {
+                      "id": "displayName",
+                      "value": "模块模式"
+                    },
+                    {
+                      "id": "noValue",
+                      "value": "N/A"
+                    },
+                    {
+                      "id": "mappings",
+                      "value": [
+                        {
+                          "options": {
+                            "1": {
+                              "color": "purple",
+                              "index": 0,
+                              "text": "多模"
+                            },
+                            "2": {
+                              "color": "yellow",
+                              "index": 1,
+                              "text": "单模"
+                            },
+                            "3": {
+                              "color": "green",
+                              "index": 2,
+                              "text": "电口"
+                            }
+                          },
+                          "type": "value"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Value #B (lastNotNull)"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.minWidth"
+                    },
+                    {
+                      "id": "custom.width"
+                    },
+                    {
+                      "id": "custom.align",
+                      "value": "center"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "type": "color-background"
+                      }
+                    },
+                    {
+                      "id": "unit",
+                      "value": "dBm"
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "fixedColor": "green",
+                        "mode": "thresholds"
+                      }
+                    },
+                    {
+                      "id": "thresholds",
+                      "value": {
+                        "mode": "absolute",
+                        "steps": [
+                          {
+                            "color": "purple"
+                          },
+                          {
+                            "color": "green",
+                            "value": -14.4
+                          },
+                          {
+                            "color": "red",
+                            "value": 0.5
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "id": "displayName",
+                      "value": "接收功率"
+                    },
+                    {
+                      "id": "noValue",
+                      "value": "N/A"
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Value #C (lastNotNull)"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.minWidth"
+                    },
+                    {
+                      "id": "custom.width"
+                    },
+                    {
+                      "id": "custom.align",
+                      "value": "center"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "type": "color-background"
+                      }
+                    },
+                    {
+                      "id": "unit",
+                      "value": "dBm"
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "mode": "thresholds"
+                      }
+                    },
+                    {
+                      "id": "thresholds",
+                      "value": {
+                        "mode": "absolute",
+                        "steps": [
+                          {
+                            "color": "red"
+                          },
+                          {
+                            "color": "green",
+                            "value": -10
+                          },
+                          {
+                            "color": "red",
+                            "value": 0.5
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "id": "displayName",
+                      "value": "发送功率"
+                    },
+                    {
+                      "id": "noValue",
+                      "value": "N/A"
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Value #D (lastNotNull)"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.minWidth"
+                    },
+                    {
+                      "id": "custom.width"
+                    },
+                    {
+                      "id": "custom.align",
+                      "value": "center"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "type": "color-text"
+                      }
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "fixedColor": "red",
+                        "mode": "fixed"
+                      }
+                    },
+                    {
+                      "id": "unit",
+                      "value": "dBm"
+                    },
+                    {
+                      "id": "displayName",
+                      "value": "接收功率过高预警"
+                    },
+                    {
+                      "id": "noValue",
+                      "value": "无法获取"
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Value #E (lastNotNull)"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.minWidth"
+                    },
+                    {
+                      "id": "custom.width"
+                    },
+                    {
+                      "id": "custom.align",
+                      "value": "center"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "type": "color-text"
+                      }
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "fixedColor": "red",
+                        "mode": "fixed"
+                      }
+                    },
+                    {
+                      "id": "noValue",
+                      "value": "无法获取"
+                    },
+                    {
+                      "id": "unit",
+                      "value": "dBm"
+                    },
+                    {
+                      "id": "displayName",
+                      "value": "接收功率过低预警"
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Value #F (lastNotNull)"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.minWidth"
+                    },
+                    {
+                      "id": "custom.width"
+                    },
+                    {
+                      "id": "custom.align",
+                      "value": "center"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "type": "color-text"
+                      }
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "fixedColor": "red",
+                        "mode": "fixed"
+                      }
+                    },
+                    {
+                      "id": "unit",
+                      "value": "dBm"
+                    },
+                    {
+                      "id": "displayName",
+                      "value": "发送功率过高预警"
+                    },
+                    {
+                      "id": "noValue",
+                      "value": "无法获取"
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Value #G (lastNotNull)"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.minWidth"
+                    },
+                    {
+                      "id": "custom.width"
+                    },
+                    {
+                      "id": "custom.align",
+                      "value": "center"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "type": "color-text"
+                      }
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "fixedColor": "red",
+                        "mode": "fixed"
+                      }
+                    },
+                    {
+                      "id": "displayName",
+                      "value": "发送功率过低预警"
+                    },
+                    {
+                      "id": "noValue",
+                      "value": "无法获取"
+                    },
+                    {
+                      "id": "unit",
+                      "value": "dBm"
+                    },
+                    {
+                      "id": "mappings",
+                      "value": []
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Value #H (lastNotNull)"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width"
+                    },
+                    {
+                      "id": "custom.minWidth"
+                    },
+                    {
+                      "id": "custom.align",
+                      "value": "center"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "type": "color-background"
+                      }
+                    },
+                    {
+                      "id": "unit",
+                      "value": "celsius"
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "fixedColor": "yellow",
+                        "mode": "thresholds"
+                      }
+                    },
+                    {
+                      "id": "thresholds",
+                      "value": {
+                        "mode": "absolute",
+                        "steps": [
+                          {
+                            "color": "green"
+                          },
+                          {
+                            "color": "yellow",
+                            "value": 60
+                          },
+                          {
+                            "color": "orange",
+                            "value": 70
+                          },
+                          {
+                            "color": "red",
+                            "value": 80
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "id": "displayName",
+                      "value": "模块温度"
+                    },
+                    {
+                      "id": "noValue",
+                      "value": "N/A"
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Value #I (lastNotNull)"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.minWidth"
+                    },
+                    {
+                      "id": "custom.width"
+                    },
+                    {
+                      "id": "custom.align",
+                      "value": "center"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "type": "color-text"
+                      }
+                    },
+                    {
+                      "id": "unit",
+                      "value": "nm"
+                    },
+                    {
+                      "id": "displayName",
+                      "value": "模块波长"
+                    },
+                    {
+                      "id": "noValue",
+                      "value": "N/A"
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "fixedColor": "yellow",
+                        "mode": "fixed"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "hh3cTransceiverType (lastNotNull)"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.minWidth"
+                    },
+                    {
+                      "id": "custom.width"
+                    },
+                    {
+                      "id": "custom.align",
+                      "value": "center"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "type": "color-text"
+                      }
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "fixedColor": "orange",
+                        "mode": "fixed"
+                      }
+                    },
+                    {
+                      "id": "unit",
+                      "value": "Mbits"
+                    },
+                    {
+                      "id": "displayName",
+                      "value": "SFP 类型"
+                    },
+                    {
+                      "id": "noValue",
+                      "value": "N/A"
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Value #K (lastNotNull)"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.minWidth"
+                    },
+                    {
+                      "id": "custom.width"
+                    },
+                    {
+                      "id": "custom.align",
+                      "value": "center"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "type": "color-text"
+                      }
+                    },
+                    {
+                      "id": "unit",
+                      "value": "volt"
+                    },
+                    {
+                      "id": "displayName",
+                      "value": "模块电压"
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "fixedColor": "#bd78ff",
+                        "mode": "fixed"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Value #L (lastNotNull)"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.minWidth"
+                    },
+                    {
+                      "id": "custom.width"
+                    },
+                    {
+                      "id": "custom.align",
+                      "value": "center"
+                    },
+                    {
+                      "id": "unit",
+                      "value": "mamp"
+                    },
+                    {
+                      "id": "displayName",
+                      "value": "模块电流"
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "fixedColor": "#b738f7",
+                        "mode": "fixed"
+                      }
+                    },
+                    {
+                      "id": "noValue",
+                      "value": "N/A"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "type": "color-text"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "gridPos": {
+              "h": 10,
+              "w": 24,
+              "x": 0,
+              "y": 47
+            },
+            "id": 23,
+            "options": {
+              "cellHeight": "sm",
+              "footer": {
+                "countRows": false,
+                "fields": "",
+                "reducer": [
+                  "sum"
+                ],
+                "show": false
+              },
+              "frameIndex": 2,
+              "showHeader": true,
+              "sortBy": []
+            },
+            "pluginVersion": "11.5.1",
+            "targets": [
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+                },
+                "editorMode": "code",
+                "exemplar": false,
+                "expr": "hh3cTransceiverHardwareType{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"}  * on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+                "format": "table",
+                "instant": true,
+                "legendFormat": "__auto",
+                "range": false,
+                "refId": "A"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+                },
+                "editorMode": "code",
+                "exemplar": false,
+                "expr": "(hh3cTransceiverCurRXPower{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} / 100) * on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+                "format": "table",
+                "hide": false,
+                "instant": true,
+                "legendFormat": "__auto",
+                "range": false,
+                "refId": "B"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+                },
+                "editorMode": "code",
+                "exemplar": false,
+                "expr": "(hh3cTransceiverCurTXPower{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} / 100) * on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+                "format": "table",
+                "hide": false,
+                "instant": true,
+                "legendFormat": "__auto",
+                "range": false,
+                "refId": "C"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+                },
+                "editorMode": "code",
+                "exemplar": false,
+                "expr": "(\n    # 主计算分支：值>0时的正确计算\n    10 * log10(\n        ((hh3cTransceiverRcvPwrHiWarn{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} > 0) / 1000)\n    )\n    # 关联sysName标签\n    * on(instance) group_left(sysName) sysName{sysName!=\"\"}\n)\nor \n(\n    # 零值分支：值<=0时返回0并携带标签\n    (hh3cTransceiverRcvPwrHiWarn{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} <= 0)\n    # 关联标签并强制返回0\n    * on(instance) group_left(sysName) sysName{sysName!=\"\"} \n    * 0 \n)",
+                "format": "table",
+                "hide": false,
+                "instant": true,
+                "legendFormat": "__auto",
+                "range": false,
+                "refId": "D"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+                },
+                "editorMode": "code",
+                "exemplar": false,
+                "expr": "(\n    # 主计算分支：值>0时的正确计算\n    10 * log10(\n        ((hh3cTransceiverRcvPwrLoWarn{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} > 0) / 1000)\n    )\n    # 关联sysName标签\n    * on(instance) group_left(sysName) sysName{sysName!=\"\"}\n)\nor \n(\n    # 零值分支：值<=0时返回0并携带标签\n    (hh3cTransceiverRcvPwrLoWarn{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} <= 0)\n    # 关联标签并强制返回0\n    * on(instance) group_left(sysName) sysName{sysName!=\"\"} \n    * 0 \n)",
+                "format": "table",
+                "hide": false,
+                "instant": true,
+                "legendFormat": "__auto",
+                "range": false,
+                "refId": "E"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+                },
+                "editorMode": "code",
+                "exemplar": false,
+                "expr": "(\n    # 主计算分支：值>0时的正确计算\n    10 * log10(\n        ((hh3cTransceiverPwrOutHiWarn{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} > 0) / 1000)\n    )\n    # 关联sysName标签\n    * on(instance) group_left(sysName) sysName{sysName!=\"\"}\n)\nor \n(\n    # 零值分支：值<=0时返回0并携带标签\n    (hh3cTransceiverPwrOutHiWarn{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} <= 0)\n    # 关联标签并强制返回0\n    * on(instance) group_left(sysName) sysName{sysName!=\"\"} \n    * 0 \n)",
+                "format": "table",
+                "hide": false,
+                "instant": true,
+                "legendFormat": "__auto",
+                "range": false,
+                "refId": "F"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+                },
+                "editorMode": "code",
+                "exemplar": false,
+                "expr": "(\n    # 主计算分支：值>0时的正确计算\n    10 * log10(\n        ((hh3cTransceiverPwrOutLoWarn{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} > 0) / 1000)\n    )\n    # 关联sysName标签\n    * on(instance) group_left(sysName) sysName{sysName!=\"\"}\n)\nor \n(\n    # 零值分支：值<=0时返回0并携带标签\n    (hh3cTransceiverPwrOutLoWarn{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} <= 0)\n    # 关联标签并强制返回0\n    * on(instance) group_left(sysName) sysName{sysName!=\"\"} \n    * 0 \n)",
+                "format": "table",
+                "hide": false,
+                "instant": true,
+                "legendFormat": "__auto",
+                "range": false,
+                "refId": "G"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+                },
+                "editorMode": "code",
+                "exemplar": false,
+                "expr": "hh3cTransceiverTemperature{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} * on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+                "format": "table",
+                "hide": false,
+                "instant": true,
+                "legendFormat": "__auto",
+                "range": false,
+                "refId": "H"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+                },
+                "editorMode": "code",
+                "exemplar": false,
+                "expr": "hh3cTransceiverWaveLength{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} * on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+                "format": "table",
+                "hide": false,
+                "instant": true,
+                "legendFormat": "__auto",
+                "range": false,
+                "refId": "I"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+                },
+                "editorMode": "code",
+                "exemplar": false,
+                "expr": "hh3cTransceiverType{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} * on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+                "format": "table",
+                "hide": false,
+                "instant": true,
+                "legendFormat": "__auto",
+                "range": false,
+                "refId": "J"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+                },
+                "editorMode": "code",
+                "exemplar": false,
+                "expr": "(hh3cTransceiverVoltage{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} / 100) * on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+                "format": "table",
+                "hide": false,
+                "instant": true,
+                "legendFormat": "__auto",
+                "range": false,
+                "refId": "K"
+              },
+              {
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+                },
+                "editorMode": "code",
+                "exemplar": false,
+                "expr": "(hh3cTransceiverBiasCurrent{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"} / 100) * on(instance) group_left(sysName) sysName{sysName!=\"\"}",
+                "format": "table",
+                "hide": false,
+                "instant": true,
+                "legendFormat": "__auto",
+                "range": false,
+                "refId": "L"
+              }
+            ],
+            "title": "光模块状态",
+            "transformations": [
+              {
+                "id": "merge",
+                "options": {}
+              },
+              {
+                "id": "groupBy",
+                "options": {
+                  "fields": {
+                    "Value #A": {
+                      "aggregations": [
+                        "lastNotNull"
+                      ],
+                      "operation": "aggregate"
+                    },
+                    "Value #B": {
+                      "aggregations": [
+                        "lastNotNull"
+                      ],
+                      "operation": "aggregate"
+                    },
+                    "Value #C": {
+                      "aggregations": [
+                        "lastNotNull"
+                      ],
+                      "operation": "aggregate"
+                    },
+                    "Value #D": {
+                      "aggregations": [
+                        "lastNotNull"
+                      ],
+                      "operation": "aggregate"
+                    },
+                    "Value #E": {
+                      "aggregations": [
+                        "lastNotNull"
+                      ],
+                      "operation": "aggregate"
+                    },
+                    "Value #F": {
+                      "aggregations": [
+                        "lastNotNull"
+                      ],
+                      "operation": "aggregate"
+                    },
+                    "Value #G": {
+                      "aggregations": [
+                        "lastNotNull"
+                      ],
+                      "operation": "aggregate"
+                    },
+                    "Value #H": {
+                      "aggregations": [
+                        "lastNotNull"
+                      ],
+                      "operation": "aggregate"
+                    },
+                    "Value #I": {
+                      "aggregations": [
+                        "lastNotNull"
+                      ],
+                      "operation": "aggregate"
+                    },
+                    "Value #J": {
+                      "aggregations": [
+                        "lastNotNull"
+                      ],
+                      "operation": "aggregate"
+                    },
+                    "Value #K": {
+                      "aggregations": [
+                        "lastNotNull"
+                      ],
+                      "operation": "aggregate"
+                    },
+                    "Value #L": {
+                      "aggregations": [
+                        "lastNotNull"
+                      ],
+                      "operation": "aggregate"
+                    },
+                    "entPhysicalIndex": {
+                      "aggregations": [],
+                      "operation": "groupby"
+                    },
+                    "entPhysicalName": {
+                      "aggregations": [
+                        "lastNotNull"
+                      ],
+                      "operation": "aggregate"
+                    },
+                    "hh3cTransceiverType": {
+                      "aggregations": [
+                        "lastNotNull"
+                      ],
+                      "operation": "aggregate"
+                    },
+                    "ifIndex": {
+                      "aggregations": [],
+                      "operation": "groupby"
+                    },
+                    "ifName": {
+                      "aggregations": [
+                        "lastNotNull"
+                      ],
+                      "operation": "aggregate"
+                    },
+                    "instance": {
+                      "aggregations": [],
+                      "operation": "groupby"
+                    },
+                    "sysName": {
+                      "aggregations": [
+                        "lastNotNull"
+                      ],
+                      "operation": "aggregate"
+                    }
+                  }
+                }
+              },
+              {
+                "id": "organize",
+                "options": {
+                  "excludeByName": {
+                    "Value #J (lastNotNull)": true,
+                    "entPhysicalIndex": true,
+                    "ifIndex": true
+                  },
+                  "includeByName": {},
+                  "indexByName": {
+                    "Value #A (lastNotNull)": 3,
+                    "Value #B (lastNotNull)": 5,
+                    "Value #C (lastNotNull)": 6,
+                    "Value #D (lastNotNull)": 7,
+                    "Value #E (lastNotNull)": 8,
+                    "Value #F (lastNotNull)": 9,
+                    "Value #G (lastNotNull)": 10,
+                    "Value #H (lastNotNull)": 11,
+                    "Value #I (lastNotNull)": 12,
+                    "Value #J (lastNotNull)": 13,
+                    "Value #K (lastNotNull)": 14,
+                    "Value #L (lastNotNull)": 15,
+                    "hh3cTransceiverType (lastNotNull)": 4,
+                    "ifIndex": 16,
+                    "ifName (lastNotNull)": 2,
+                    "instance": 0,
+                    "sysName (lastNotNull)": 1
+                  },
+                  "renameByName": {}
+                }
+              }
+            ],
+            "type": "table"
+          }
+        ],
+        "title": "光模块信息",
+        "type": "row"
+      }
+    ],
+    "refresh": "5m",
+    "schemaVersion": 40,
+    "tags": [
+      "huawei",
+      "Prometheus",
+      "snmp_exporter"
+    ],
+    "templating": {
+      "list": [
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+          },
+          "definition": "label_values(sysName,job)",
+          "description": "筛选抓取的任务",
+          "label": "任务",
+          "name": "job",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values(sysName,job)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "/h3c.*/",
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+          },
+          "definition": "label_values(sysName{job=~\"$job\"},region)",
+          "description": "筛选设备所在的地域",
+          "includeAll": false,
+          "label": "区域",
+          "name": "region",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values(sysName{job=~\"$job\"},region)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "sort": 5,
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+          },
+          "definition": "label_values(sysName{job=~\"$job\", region=~\"$region\"},brand)",
+          "description": "筛选设备所属的品牌",
+          "includeAll": false,
+          "label": "品牌",
+          "name": "brand",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values(sysName{job=~\"$job\", region=~\"$region\"},brand)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "sort": 5,
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+          },
+          "definition": "label_values(sysName{job=~\"$job\", region=~\"$region\", brand=~\"$brand\"},role)",
+          "description": "筛选设备当前的功能角色",
+          "includeAll": false,
+          "label": "角色",
+          "name": "role",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values(sysName{job=~\"$job\", region=~\"$region\", brand=~\"$brand\"},role)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "/sw.*/",
+          "sort": 5,
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+          },
+          "definition": "query_result(count by (instance) (count_over_time(sysName{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\"}[$__range])))",
+          "description": "筛选设备唯一实例ID",
+          "includeAll": false,
+          "label": "实例",
+          "name": "device_ip",
+          "options": [],
+          "query": {
+            "qryType": 3,
+            "query": "query_result(count by (instance) (count_over_time(sysName{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\"}[$__range])))",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "/instance=\\\"(.*)\\\"/",
+          "sort": 5,
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+          },
+          "definition": "query_result(count by (ifName) (count_over_time(ifHCInOctets{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"}[$__range])))",
+          "description": "筛选当前设备实例的接口名称",
+          "includeAll": false,
+          "label": "接口名称",
+          "name": "interface",
+          "options": [],
+          "query": {
+            "qryType": 3,
+            "query": "query_result(count by (ifName) (count_over_time(ifHCInOctets{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\", instance=~\"$device_ip\"}[$__range])))",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "/ifName=\\\"(Eth-.*|.*Ethernet.*|.*GE.*)\\\"/",
+          "sort": 4,
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+          },
+          "definition": "query_result(count(sysName{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\"}))",
+          "description": "查询该数据源下的设备总数",
+          "hide": 2,
+          "includeAll": false,
+          "label": "设备总数",
+          "name": "total",
+          "options": [],
+          "query": {
+            "qryType": 3,
+            "query": "query_result(count(sysName{job=~\"$job\", region=~\"$region\", brand=~\"$brand\", role=~\"$role\"}))",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "/{} (.*) .*/",
+          "sort": 5,
+          "type": "query"
+        },
+        {
+          "baseFilters": [],
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_VICTORIAMETRICS-SINGLE}"
+          },
+          "filters": [],
+          "label": "筛选",
+          "name": "Filters",
+          "type": "adhoc"
+        },
+        {
+          "baseFilters": [],
+          "datasource": "${DS_VICTORIAMETRICS-SINGLE}",
+          "filters": [],
+          "name": "Filters",
+          "type": "adhoc"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-5m",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "H3C Switch SNMP Dashboard for Prometheus",
+    "uid": "h3c-campus-switch-xiaofei-prom",
+    "version": 38,
+    "weekStart": ""
+  }
