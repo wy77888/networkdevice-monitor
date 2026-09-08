@@ -1,7 +1,7 @@
 auths:
   public_v2:  # 认证模块名称
     version: 2  # snmp v2c版本
-    community: public  # snmp 团体名
+    community: <REDACTED>  # snmp 团体名(真实值只保存在设备/服务器上,不要提交明文)
 
 modules:
   huawei_common:  # 华为公共指标模块名称
@@ -9,6 +9,7 @@ modules:
       # 交换机基础信息 温度信息 风扇信息 电源信息
       - 1.3.6.1.2.1.1.1                       # sysDescr 系统的文字描述
       - 1.3.6.1.2.1.1.5                       # sysName 交换机名称
+      - 1.3.6.1.2.1.1.3                       # sysUpTime 系统运行时间 单位百分之一秒(TimeTicks)
       - 1.3.6.1.4.1.2011.5.25.31.1.1.6.1.1    # hwEntPowerUsedInfoBoardName 板卡实体名称
       - 1.3.6.1.4.1.2011.5.25.31.1.1.1.1.10   # hwEntityUpTime 板卡实体启动时间 单位秒
       - 1.3.6.1.4.1.2011.5.25.31.1.1.1.1.11   # hwEntityTemperature 实体温度 单位°C
@@ -16,6 +17,10 @@ modules:
       - 1.3.6.1.4.1.2011.5.25.31.1.1.10.1.7   # hwEntityFanState 风扇状态
       - 1.3.6.1.4.1.2011.5.25.31.1.1.10.1.6   # hwEntityFanPresent 风扇的在位状态
       - 1.3.6.1.4.1.2011.5.25.31.1.1.10.1.5   # hwEntityFanSpeed 风扇的转速
+      - fmEntityCpuUsage                        # FMEntityCpuUsage (自定义MIB,企业号56813)
+      - fmEntityMemUsage                        # FMEntityMemUsage
+      - fmEntityTemperature                     # FMEntityTemperature
+      - fmEntityFanSpeed                        # FMEntityFanSpeed
       #- 1.3.6.1.4.1.2011.5.25.31.1.1.18.1.1  # hwEntityPwrSlot 电源的槽位号
       - 1.3.6.1.4.1.2011.5.25.31.1.1.18.1.6   # hwEntityPwrState 电源的状态
       - 1.3.6.1.4.1.2011.6.157.1.6            # hwCurrentPower 当前功率mW

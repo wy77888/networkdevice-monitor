@@ -1,0 +1,230 @@
+-- ============================================================================
+-- Custom supplemental MIB (not from vendor). Mirrors the CPU/memory/
+-- temperature/fan objects of HUAWEI-ENTITY-EXTENT-MIB under the
+-- FutureMatrix OEM enterprise branch (56813) instead of Huawei's (2011).
+-- Column numbers match those empirically confirmed via live SNMP walk
+-- against a FutureMatrix S5735S-S24T4S-XA (V200R024C00SPC500).
+-- ============================================================================
+
+    FUTUREMATRIX-ENTITY-EXTENT-MIB DEFINITIONS ::= BEGIN
+
+        IMPORTS
+            entPhysicalIndex
+                FROM ENTITY-MIB
+            enterprises, Integer32, OBJECT-TYPE, MODULE-IDENTITY
+                FROM SNMPv2-SMI;
+
+        -- 1.3.6.1.4.1.56813.5.25.31
+        fmEntityExtentMIB MODULE-IDENTITY
+            LAST-UPDATED "202609080000Z"
+            ORGANIZATION
+                "FutureMatrix"
+            CONTACT-INFO
+                "Internal supplemental MIB, not vendor-issued."
+            DESCRIPTION
+                "Supplemental MIB providing CPU, memory, temperature and fan
+                entity metrics for FutureMatrix-branded devices, mirroring
+                HUAWEI-ENTITY-EXTENT-MIB but under enterprise 56813."
+            ::= { enterprises 56813 5 25 31 }
+
+        -- 1.3.6.1.4.1.56813.5.25.31.1
+        fmEntityExtObjects OBJECT IDENTIFIER ::= { fmEntityExtentMIB 1 }
+
+        -- 1.3.6.1.4.1.56813.5.25.31.1.1
+        fmEntityState OBJECT IDENTIFIER ::= { fmEntityExtObjects 1 }
+
+        -- 1.3.6.1.4.1.56813.5.25.31.1.1.1
+        fmEntityStateTable OBJECT-TYPE
+            SYNTAX SEQUENCE OF FmEntityStateEntry
+            MAX-ACCESS not-accessible
+            STATUS current
+            DESCRIPTION
+                "Entity CPU usage, memory usage, and temperature status
+                table. Mirrors hwEntityStateTable."
+            ::= { fmEntityState 1 }
+
+        -- 1.3.6.1.4.1.56813.5.25.31.1.1.1.1
+        fmEntityStateEntry OBJECT-TYPE
+            SYNTAX FmEntityStateEntry
+            MAX-ACCESS not-accessible
+            STATUS current
+            DESCRIPTION
+                "An entry in fmEntityStateTable, indexed by the standard
+                ENTITY-MIB physical index."
+            INDEX { entPhysicalIndex }
+            ::= { fmEntityStateTable 1 }
+
+        FmEntityStateEntry ::=
+            SEQUENCE {
+                fmEntityCpuUsage
+                    Integer32,
+                fmEntityCpuUsageThreshold
+                    Integer32,
+                fmEntityMemUsage
+                    Integer32,
+                fmEntityMemUsageThreshold
+                    Integer32,
+                fmEntityTemperature
+                    Integer32,
+                fmEntityTemperatureThreshold
+                    Integer32,
+                fmEntityTemperatureLowThreshold
+                    Integer32
+            }
+
+        -- 1.3.6.1.4.1.56813.5.25.31.1.1.1.1.5
+        fmEntityCpuUsage OBJECT-TYPE
+            SYNTAX Integer32 (0..100)
+            MAX-ACCESS read-only
+            STATUS current
+            DESCRIPTION
+                "This object indicates the CPU usage of an entity."
+            ::= { fmEntityStateEntry 5 }
+
+        -- 1.3.6.1.4.1.56813.5.25.31.1.1.1.1.6
+        fmEntityCpuUsageThreshold OBJECT-TYPE
+            SYNTAX Integer32 (0..100)
+            MAX-ACCESS read-write
+            STATUS current
+            DESCRIPTION
+                "This object indicates the CPU usage threshold. When the CPU
+                usage exceeds the threshold, a notification is sent."
+            ::= { fmEntityStateEntry 6 }
+
+        -- 1.3.6.1.4.1.56813.5.25.31.1.1.1.1.7
+        fmEntityMemUsage OBJECT-TYPE
+            SYNTAX Integer32 (0..100)
+            MAX-ACCESS read-only
+            STATUS current
+            DESCRIPTION
+                "This object indicates the memory usage of an entity."
+            ::= { fmEntityStateEntry 7 }
+
+        -- 1.3.6.1.4.1.56813.5.25.31.1.1.1.1.8
+        fmEntityMemUsageThreshold OBJECT-TYPE
+            SYNTAX Integer32 (0..100)
+            MAX-ACCESS read-write
+            STATUS current
+            DESCRIPTION
+                "This object indicates the memory usage threshold."
+            ::= { fmEntityStateEntry 8 }
+
+        -- 1.3.6.1.4.1.56813.5.25.31.1.1.1.1.11
+        fmEntityTemperature OBJECT-TYPE
+            SYNTAX Integer32
+            MAX-ACCESS read-only
+            STATUS current
+            DESCRIPTION
+                "This object indicates the entity temperature, in degrees
+                Celsius."
+            ::= { fmEntityStateEntry 11 }
+
+        -- 1.3.6.1.4.1.56813.5.25.31.1.1.1.1.12
+        fmEntityTemperatureThreshold OBJECT-TYPE
+            SYNTAX Integer32
+            MAX-ACCESS read-write
+            STATUS current
+            DESCRIPTION
+                "This object indicates the upper threshold of the entity
+                temperature."
+            ::= { fmEntityStateEntry 12 }
+
+        -- 1.3.6.1.4.1.56813.5.25.31.1.1.1.1.16
+        fmEntityTemperatureLowThreshold OBJECT-TYPE
+            SYNTAX Integer32
+            MAX-ACCESS read-write
+            STATUS current
+            DESCRIPTION
+                "This object indicates the lower threshold of the entity
+                temperature."
+            ::= { fmEntityStateEntry 16 }
+
+        -- 1.3.6.1.4.1.56813.5.25.31.1.1.10
+        fmFanStatusTable OBJECT-TYPE
+            SYNTAX SEQUENCE OF FmFanStatusEntry
+            MAX-ACCESS not-accessible
+            STATUS current
+            DESCRIPTION
+                "This table describes fan information on a device. Mirrors
+                hwFanStatusTable."
+            ::= { fmEntityState 10 }
+
+        -- 1.3.6.1.4.1.56813.5.25.31.1.1.10.1
+        fmFanStatusEntry OBJECT-TYPE
+            SYNTAX FmFanStatusEntry
+            MAX-ACCESS not-accessible
+            STATUS current
+            DESCRIPTION
+                "Defines an entry in the fmFanStatusTable."
+            INDEX { fmEntityFanSlot, fmEntityFanSn }
+            ::= { fmFanStatusTable 1 }
+
+        FmFanStatusEntry ::=
+            SEQUENCE {
+                fmEntityFanSlot
+                    Integer32,
+                fmEntityFanSn
+                    Integer32,
+                fmEntityFanSpeed
+                    Integer32,
+                fmEntityFanPresent
+                    INTEGER,
+                fmEntityFanState
+                    INTEGER
+            }
+
+        -- 1.3.6.1.4.1.56813.5.25.31.1.1.10.1.1
+        fmEntityFanSlot OBJECT-TYPE
+            SYNTAX Integer32
+            MAX-ACCESS read-only
+            STATUS current
+            DESCRIPTION
+                "This object indicates the slot of a fan."
+            ::= { fmFanStatusEntry 1 }
+
+        -- 1.3.6.1.4.1.56813.5.25.31.1.1.10.1.2
+        fmEntityFanSn OBJECT-TYPE
+            SYNTAX Integer32
+            MAX-ACCESS read-only
+            STATUS current
+            DESCRIPTION
+                "This object indicates the number of the fan in the same
+                slot."
+            ::= { fmFanStatusEntry 2 }
+
+        -- 1.3.6.1.4.1.56813.5.25.31.1.1.10.1.5
+        fmEntityFanSpeed OBJECT-TYPE
+            SYNTAX Integer32
+            MAX-ACCESS read-only
+            STATUS current
+            DESCRIPTION
+                "This object indicates the fan speed."
+            ::= { fmFanStatusEntry 5 }
+
+        -- 1.3.6.1.4.1.56813.5.25.31.1.1.10.1.6
+        fmEntityFanPresent OBJECT-TYPE
+            SYNTAX INTEGER
+                {
+                yes(1),
+                no(2)
+                }
+            MAX-ACCESS read-only
+            STATUS current
+            DESCRIPTION
+                "This object indicates whether the fan is present."
+            ::= { fmFanStatusEntry 6 }
+
+        -- 1.3.6.1.4.1.56813.5.25.31.1.1.10.1.7
+        fmEntityFanState OBJECT-TYPE
+            SYNTAX INTEGER
+                {
+                normal(1),
+                abnormal(2)
+                }
+            MAX-ACCESS read-only
+            STATUS current
+            DESCRIPTION
+                "This object indicates the fan running state."
+            ::= { fmFanStatusEntry 7 }
+
+    END
